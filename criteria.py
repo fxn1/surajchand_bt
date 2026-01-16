@@ -1,0 +1,44 @@
+import math
+import pandas as pd
+
+class EntryExit:
+    def __init__(self,
+                    entry_rsi_low: float = 30.0,
+                    entry_rsi_high: float = 50.0,
+                    hold_days: int = 180,
+                    profit_take: float = 0.50):
+
+        self.entry_rsi_low = entry_rsi_low
+        self.entry_rsi_high = entry_rsi_high
+        self.hold_days = hold_days
+        self.profit_take = profit_take
+
+    def check_entry_conditions(self, d, end_ts , rsi: float, sigma: float) -> bool:
+        """
+        Check if the entry criteria are met.
+        :param rsi: RSI value.
+        :param sigma: Volatility.
+        :return: True if entry criteria are met, False otherwise.
+        """
+        # Ensure we can hold 180 days within the backtest window
+        if d + pd.Timedelta(days=self.hold_days) > end_ts:
+            return False
+
+        if pd.isna(rsi) or not (self.entry_rsi_low <= float(rsi) <= self.entry_rsi_high):
+            return False
+
+        if not (math.isfinite(sigma) and sigma > 0):
+            return False
+        return True
+
+    def check_exit_conditions(self, holding: int, px: float, target_price: float) -> bool:
+        """
+        Check if the exit criteria are met.
+        :param holding: Number of holding days.
+        :param px: Current price.
+        :param target_price: Target price.
+        :return: True if exit criteria are met, False otherwise.
+        """
+        hit_profit = px >= target_price
+        hit_time = holding >= self.hold_days
+        return hit_profit, hit_profit or hit_time

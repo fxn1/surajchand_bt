@@ -27,12 +27,13 @@ import math
 from dataclasses import dataclass
 from datetime import datetime
 from calendar import monthcalendar, FRIDAY
-from statistics import NormalDist
 from typing import Optional, Dict, List
 
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+
+from black_scholes import BlackScholesModel
+from criteria import EntryExit
 
 START_DATE = "1995-01-01"
 END_DATE = "2025-12-29"
@@ -110,48 +111,6 @@ def rsi_wilder(close: pd.Series, period: int = 14) -> pd.Series:
 
 
 # -----------------------------
-# Black–Scholes call price + delta
-# -----------------------------
-
-N = NormalDist()
-
-def bs_call_price_delta(S: float, K: float, T: float, r: float, q: float, sigma: float) -> tuple[float, float]:
-    if T <= 0 or sigma <= 0 or not math.isfinite(sigma):
-        call = max(S - K, 0.0)
-        delta = 1.0 if S > K else 0.0
-        return call, delta
-
-    sqrtT = math.sqrt(T)
-    d1 = (math.log(S / K) + (r - q + 0.5 * sigma * sigma) * T) / (sigma * sqrtT)
-    d2 = d1 - sigma * sqrtT
-    Nd1, Nd2 = N.cdf(d1), N.cdf(d2)
-
-    call = S * math.exp(-q * T) * Nd1 - K * math.exp(-r * T) * Nd2
-    delta = math.exp(-q * T) * Nd1
-    return call, delta
-
-
-def strike_for_delta_call(S: float, target_delta: float, T: float, r: float, q: float, sigma: float,
-                          strike_round: float = 1.0) -> float:
-    """
-    Solve strike K that gives target call delta under BS:
-    delta = exp(-qT) * N(d1)
-    """
-    adj = target_delta * math.exp(q * T)
-    adj = min(max(adj, 1e-6), 1 - 1e-6)
-    d1 = N.inv_cdf(adj)
-
-    ln_S_over_K = d1 * sigma * math.sqrt(T) - (r - q + 0.5 * sigma * sigma) * T
-    K = S / math.exp(ln_S_over_K)
-
-    if strike_round and strike_round > 0:
-        K = round(K / strike_round) * strike_round
-        K = max(strike_round, K)
-
-    return float(K)
-
-
-# -----------------------------
 # Expiration rules
 # -----------------------------
 
@@ -207,7 +166,6 @@ def pick_expiry(entry: pd.Timestamp,
 
     raise ValueError(f"Unknown expiry mode: {mode}")
 
-
 # -----------------------------
 # Backtest engine
 # -----------------------------
@@ -230,14 +188,13 @@ def max_drawdown(equity: pd.Series) -> float:
 
 
 def backtest(
+    bs_model: BlackScholesModel,
+    entryExit: EntryExit(entry_rsi_low, entry_rsi_high, hold_days, profit_take),
     #symbol: str = "qqq.us",
     symbol: str = STOCK_SYMBOL,
     start: str = START_DATE,
     end: str = END_DATE,
     target_delta: float = 0.90,
-    entry_rsi_low: float = 30.0,
-    entry_rsi_high: float = 50.0,
-    hold_days: int = 180,
     profit_take: float = 0.50,
     expiry_mode: str = "monthly_3rd_friday",     # or "leaps_jan_3rd_friday"
     vol_source: str = "vxn",                     # "vxn" or "hv" or "vxn_then_hv"
@@ -306,15 +263,13 @@ def backtest(
         # Mark-to-market
         if pos is not None:
             T = max((pos.expiry - d).days / 365.0, 1 / 365.0)
-            px, _ = bs_call_price_delta(S, pos.K, T, r, q, sigma)
+            px, _ = bs_model.bs_call_price_delta(S, pos.K, T, r, q, sigma)
             pos_value = px * 100 * pos.contracts
             equity = cash + pos_value
 
             holding = (d - pos.entry_date).days
-            hit_profit = px >= pos.target_price
-            hit_time = holding >= hold_days
-
-            if hit_profit or hit_time:
+            hit_profit, exit_true = entryExit.check_exit_conditions(holding, px, pos.target_price)
+            if exit_true:
                 cash += pos_value
                 cash -= commission_per_contract * pos.contracts
 
@@ -342,14 +297,7 @@ def backtest(
 
         # Entries
         if pos is None:
-            # Ensure we can hold 180 days within the backtest window
-            if d + pd.Timedelta(days=hold_days) > end_ts:
-                continue
-
-            if pd.isna(rsi) or not (entry_rsi_low <= float(rsi) <= entry_rsi_high):
-                continue
-
-            if not (math.isfinite(sigma) and sigma > 0):
+            if not entryExit.check_entry_conditions(d, end_ts, rsi, sigma):
                 continue
 
             expiry = pick_expiry(d, idx, mode=expiry_mode, min_days_out=365)
@@ -357,8 +305,8 @@ def backtest(
                 continue
 
             T0 = (expiry - d).days / 365.0
-            K = strike_for_delta_call(S, target_delta, T0, r, q, sigma, strike_round=strike_round)
-            entry_px, _ = bs_call_price_delta(S, K, T0, r, q, sigma)
+            K = bs_model.strike_for_delta_call(S, target_delta, T0, r, q, sigma, strike_round=strike_round)
+            entry_px, _ = bs_model.bs_call_price_delta(S, K, T0, r, q, sigma)
             if not (math.isfinite(entry_px) and entry_px > 0):
                 continue
 
@@ -460,12 +408,6 @@ def backtest(
             "CAGR": cagr, "bh_CAGR": bh_cagr,
             "Sharpe": sharpe, "bh_Sharpe": bh_sharpe,
             "max_drawdown": mdd, "bh_max_drawdown": bh_mdd,
-            # buy-and-hold metrics
-#            "bh_starting_equity": bh_start,
-#             "bh_ending_equity": bh_end,
-#             "bh_CAGR": bh_cagr,
-#             "bh_Sharpe": bh_sharpe,
-#             "bh_max_drawdown": bh_mdd,
             "trades": len(trades_df),
             "wins": wins,
             "losses": losses,
@@ -478,6 +420,13 @@ def backtest(
 def main():
     # Change these if you want:
     results = backtest(
+        bs_model=BlackScholesModel(q=0.00),
+        entryExit=EntryExit(
+            entry_rsi_low=30.0,
+            entry_rsi_high=50.0,
+            hold_days=180,
+            profit_take=0.50,
+        ),
         symbol= STOCK_SYMBOL,
         #symbol="qqq.us",
         start=START_DATE,
@@ -500,20 +449,7 @@ def main():
         else:
             print(f"{k:>16}: {v}")
 
-    print("\n=== TRADES ===")
-    t = results["trades"]
-    if len(t) == 0:
-        print("No trades.")
-    else:
-        cols = ["entry_date", "exit_date", "expiry", "K", "contracts",
-                "entry_price", "exit_price", "holding_days", "reason", "return_%", "pnl_$"]
-        out = t[cols].copy()
-        out["K"] = out["K"].round(0).astype(int)
-        out["entry_price"] = out["entry_price"].round(2)
-        out["exit_price"] = out["exit_price"].round(2)
-        out["return_%"] = out["return_%"].round(2)
-        out["pnl_$"] = out["pnl_$"].round(2)
-        print(out.to_string(index=False))
+    # showTrades(results)
 
     eq = results["equity_curve"]
     bh = results.get("buy_and_hold")
@@ -528,6 +464,23 @@ def main():
     plt.legend()
     plt.tight_layout()
     plt.show()
+
+
+def showTrades(results):
+    print("\n=== TRADES ===")
+    t = results["trades"]
+    if len(t) == 0:
+        print("No trades.")
+    else:
+        cols = ["entry_date", "exit_date", "expiry", "K", "contracts",
+                "entry_price", "exit_price", "holding_days", "reason", "return_%", "pnl_$"]
+        out = t[cols].copy()
+        out["K"] = out["K"].round(0).astype(int)
+        out["entry_price"] = out["entry_price"].round(2)
+        out["exit_price"] = out["exit_price"].round(2)
+        out["return_%"] = out["return_%"].round(2)
+        out["pnl_$"] = out["pnl_$"].round(2)
+        print(out.to_string(index=False))
 
 
 if __name__ == "__main__":
