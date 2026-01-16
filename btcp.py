@@ -34,7 +34,12 @@ import matplotlib.pyplot as plt
 
 from black_scholes import BlackScholesModel
 from criteria import EntryExit
+from buy_and_hold import calculate_buy_and_hold
+from option_rsi import OptionRSI
 
+##############
+
+############
 START_DATE = "1995-01-01"
 END_DATE = "2025-12-29"
 STOCK_SYMBOL = "QQQ.US"
@@ -179,13 +184,6 @@ class Position:
     entry_price: float
     target_price: float
     cost_basis: float
-
-
-def max_drawdown(equity: pd.Series) -> float:
-    peak = equity.cummax()
-    dd = equity / peak - 1.0
-    return float(dd.min())
-
 
 def backtest(
     bs_model: BlackScholesModel,
@@ -338,45 +336,11 @@ def backtest(
             )
 
     eq = pd.DataFrame(equity_curve).set_index("Date")
-    eq = eq.asfreq("B", method="ffill")
-    eq["daily_ret"] = eq["Equity"].pct_change()
-
-    start_eq = float(eq["Equity"].iloc[0])
-    end_eq = float(eq["Equity"].iloc[-1])
-    years = (eq.index[-1] - eq.index[0]).days / 365.25
-    cagr = (end_eq / start_eq) ** (1 / years) - 1 if years > 0 else float("nan")
-    mdd = max_drawdown(eq["Equity"])
-
-    # Sharpe ratio (annualized, excess returns over the backtest's risk-free series)
     rf_daily = data["r"].reindex(eq.index).ffill() / 252.0
-    daily_ret = eq["daily_ret"].reindex(rf_daily.index)
-    daily_excess = (daily_ret - rf_daily).dropna()
-    sharpe = float(daily_excess.mean() / daily_excess.std() * math.sqrt(252)) if len(daily_excess) > 1 and daily_excess.std() > 0 else float("nan")
 
+    eq_values, start_eq, end_eq, cagr, mdd, sharpe = OptionRSI.calculate_metrics(eq, rf_daily)
     # Buy-and-hold underlying QQQ comparison (uses fractional shares for simplicity)
-    close_on_eq_index = data["Close"].reindex(eq.index).ffill()
-    first_close = close_on_eq_index.iloc[0] if len(close_on_eq_index) > 0 else float("nan")
-    if pd.notna(first_close) and first_close > 0:
-        bh_shares = float(starting_cash) / float(first_close)
-        buy_and_hold = close_on_eq_index * bh_shares
-    else:
-        buy_and_hold = pd.Series(0.0, index=eq.index, name="BuyAndHold")
-
-    # --- New: buy-and-hold metrics: ending_equity, CAGR, Sharpe, max_drawdown
-    if len(buy_and_hold) > 0 and buy_and_hold.dropna().sum() > 0:
-        bh_start = float(buy_and_hold.iloc[0])
-        bh_end = float(buy_and_hold.iloc[-1])
-        bh_cagr = (bh_end / bh_start) ** (1 / years) - 1 if years > 0 else float("nan")
-        bh_mdd = max_drawdown(buy_and_hold)
-        bh_daily_ret = buy_and_hold.pct_change()
-        bh_daily_excess = (bh_daily_ret.reindex(rf_daily.index) - rf_daily).dropna()
-        bh_sharpe = float(bh_daily_excess.mean() / bh_daily_excess.std() * math.sqrt(252)) if len(bh_daily_excess) > 1 and bh_daily_excess.std() > 0 else float("nan")
-    else:
-        bh_start = float("nan")
-        bh_end = float("nan")
-        bh_cagr = float("nan")
-        bh_mdd = float("nan")
-        bh_sharpe = float("nan")
+    buy_and_hold, bh_end, bh_cagr, bh_mdd, bh_sharpe = calculate_buy_and_hold(data, starting_cash, rf_daily)
 
     trades_df = pd.DataFrame(trades)
     if len(trades_df) > 0:
