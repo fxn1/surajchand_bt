@@ -8,9 +8,13 @@ C:\Neeraj\backup\tech\systematicinv\backtrader\PycharmProjects\venv\Scripts\pyth
       vol_source: vxn_then_hv
  starting_equity: 8,000.000000
    ending_equity: 46,607.518973
+bh_ending_equity: 114,728.410004
             CAGR:     6.80%
+         bh_CAGR:    10.44%
           Sharpe: 0.404295
+       bh_Sharpe: 0.411513
     max_drawdown:   -46.65%
+ bh_max_drawdown:   -82.96%
           trades: 57
             wins: 41
           losses: 16

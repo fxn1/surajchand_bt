@@ -405,6 +405,31 @@ def backtest(
     daily_excess = (daily_ret - rf_daily).dropna()
     sharpe = float(daily_excess.mean() / daily_excess.std() * math.sqrt(252)) if len(daily_excess) > 1 and daily_excess.std() > 0 else float("nan")
 
+    # Buy-and-hold underlying QQQ comparison (uses fractional shares for simplicity)
+    close_on_eq_index = data["Close"].reindex(eq.index).ffill()
+    first_close = close_on_eq_index.iloc[0] if len(close_on_eq_index) > 0 else float("nan")
+    if pd.notna(first_close) and first_close > 0:
+        bh_shares = float(starting_cash) / float(first_close)
+        buy_and_hold = close_on_eq_index * bh_shares
+    else:
+        buy_and_hold = pd.Series(0.0, index=eq.index, name="BuyAndHold")
+
+    # --- New: buy-and-hold metrics: ending_equity, CAGR, Sharpe, max_drawdown
+    if len(buy_and_hold) > 0 and buy_and_hold.dropna().sum() > 0:
+        bh_start = float(buy_and_hold.iloc[0])
+        bh_end = float(buy_and_hold.iloc[-1])
+        bh_cagr = (bh_end / bh_start) ** (1 / years) - 1 if years > 0 else float("nan")
+        bh_mdd = max_drawdown(buy_and_hold)
+        bh_daily_ret = buy_and_hold.pct_change()
+        bh_daily_excess = (bh_daily_ret.reindex(rf_daily.index) - rf_daily).dropna()
+        bh_sharpe = float(bh_daily_excess.mean() / bh_daily_excess.std() * math.sqrt(252)) if len(bh_daily_excess) > 1 and bh_daily_excess.std() > 0 else float("nan")
+    else:
+        bh_start = float("nan")
+        bh_end = float("nan")
+        bh_cagr = float("nan")
+        bh_mdd = float("nan")
+        bh_sharpe = float("nan")
+
     trades_df = pd.DataFrame(trades)
     if len(trades_df) > 0:
         wins = int((trades_df["pnl_$"] > 0).sum())
@@ -423,6 +448,7 @@ def backtest(
     return {
         "equity_curve": eq,
         "trades": trades_df,
+        "buy_and_hold": buy_and_hold,  # series with buy-and-hold equity
         "summary": {
             "symbol": symbol,
             "start": start,
@@ -430,10 +456,16 @@ def backtest(
             "expiry_mode": expiry_mode,
             "vol_source": vol_source,
             "starting_equity": start_eq,
-            "ending_equity": end_eq,
-            "CAGR": cagr,
-            "Sharpe": sharpe,
-            "max_drawdown": mdd,
+            "ending_equity": end_eq, "bh_ending_equity": bh_end,
+            "CAGR": cagr, "bh_CAGR": bh_cagr,
+            "Sharpe": sharpe, "bh_Sharpe": bh_sharpe,
+            "max_drawdown": mdd, "bh_max_drawdown": bh_mdd,
+            # buy-and-hold metrics
+#            "bh_starting_equity": bh_start,
+#             "bh_ending_equity": bh_end,
+#             "bh_CAGR": bh_cagr,
+#             "bh_Sharpe": bh_sharpe,
+#             "bh_max_drawdown": bh_mdd,
             "trades": len(trades_df),
             "wins": wins,
             "losses": losses,
@@ -461,7 +493,7 @@ def main():
     print("\n=== SUMMARY ===")
     for k, v in s.items():
         if isinstance(v, float):
-            if k in {"CAGR", "max_drawdown", "win_rate"}:
+            if k in {"CAGR", "max_drawdown", "win_rate", "bh_CAGR", "bh_max_drawdown"}:
                 print(f"{k:>16}: {v*100:8.2f}%")
             else:
                 print(f"{k:>16}: {v:,.6f}")
@@ -484,11 +516,16 @@ def main():
         print(out.to_string(index=False))
 
     eq = results["equity_curve"]
+    bh = results.get("buy_and_hold")
+
     plt.figure()
-    plt.plot(eq.index, eq["Equity"])
-    plt.title("Equity Curve (VXN IV + 3rd-Friday Expiries, Model-Based)")
+    plt.plot(eq.index, eq["Equity"], label="Strategy Equity")
+    if bh is not None:
+        plt.plot(bh.index, bh.values, label="Buy & Hold QQQ")
+    plt.title("Equity Curve: Strategy vs Buy & Hold QQQ")
     plt.xlabel("Date")
     plt.ylabel("Equity ($)")
+    plt.legend()
     plt.tight_layout()
     plt.show()
 
