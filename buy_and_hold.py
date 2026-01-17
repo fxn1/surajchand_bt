@@ -30,7 +30,6 @@ def calculate_buy_and_hold(data: pd.DataFrame, starting_cash: float, rf_daily: p
         bh_sharpe = float(bh_daily_excess.mean() / bh_daily_excess.std() * sqrt(252)) if len(
             bh_daily_excess) > 1 and bh_daily_excess.std() > 0 else float("nan")
     else:
-        bh_start = float("nan")
         bh_end = float("nan")
         bh_cagr = float("nan")
         bh_mdd = float("nan")

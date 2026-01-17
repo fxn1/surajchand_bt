@@ -25,7 +25,6 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
-from datetime import datetime
 from calendar import monthcalendar, FRIDAY
 from typing import Optional, Dict, List
 
@@ -335,12 +334,20 @@ def backtest(
                 cost_basis=float(cost),
             )
 
+    stratDf = pd.DataFrame(columns=["name", "end_eq", "cagr", "mdd", "sharpe"])
+    plotDf = pd.DataFrame(columns=["name", "index", "values"])
     eq = pd.DataFrame(equity_curve).set_index("Date")
     rf_daily = data["r"].reindex(eq.index).ffill() / 252.0
 
-    eq_values, start_eq, end_eq, cagr, mdd, sharpe = OptionRSI.calculate_metrics(eq, rf_daily)
+    _, _, end_eq, cagr, mdd, sharpe = OptionRSI.calculate_metrics(eq, rf_daily)
+    stratDf.loc[len(stratDf)] = ["OptionRSI", end_eq, cagr*100, mdd*100, sharpe]
+    plotDf.loc[len(plotDf)] = ["OptionRSI", eq.index, eq["Equity"]]
+
     # Buy-and-hold underlying QQQ comparison (uses fractional shares for simplicity)
     buy_and_hold, bh_end, bh_cagr, bh_mdd, bh_sharpe = calculate_buy_and_hold(data, starting_cash, rf_daily)
+    stratDf.loc[len(stratDf)] = ["buy_and_hold", bh_end, bh_cagr*100, bh_mdd*100, bh_sharpe]
+    plotDf.loc[len(plotDf)] = ["buy_and_hold", buy_and_hold.index, buy_and_hold.values]
+
 
     trades_df = pd.DataFrame(trades)
     if len(trades_df) > 0:
@@ -361,21 +368,18 @@ def backtest(
         "equity_curve": eq,
         "trades": trades_df,
         "buy_and_hold": buy_and_hold,  # series with buy-and-hold equity
+        "stratDf": stratDf,
+        "plotDf": plotDf,
         "summary": {
             "symbol": symbol,
             "start": start,
             "end": end,
             "expiry_mode": expiry_mode,
             "vol_source": vol_source,
-            "starting_equity": start_eq,
-            "ending_equity": end_eq, "bh_ending_equity": bh_end,
-            "CAGR": cagr, "bh_CAGR": bh_cagr,
-            "Sharpe": sharpe, "bh_Sharpe": bh_sharpe,
-            "max_drawdown": mdd, "bh_max_drawdown": bh_mdd,
             "trades": len(trades_df),
             "wins": wins,
             "losses": losses,
-            "win_rate": win_rate,
+            "win_rate": win_rate*100,
             "profit_factor": profit_factor,
         }
     }
@@ -406,22 +410,16 @@ def main():
     print("\n=== SUMMARY ===")
     for k, v in s.items():
         if isinstance(v, float):
-            if k in {"CAGR", "max_drawdown", "win_rate", "bh_CAGR", "bh_max_drawdown"}:
-                print(f"{k:>16}: {v*100:8.2f}%")
-            else:
-                print(f"{k:>16}: {v:,.6f}")
+            print(f"{k:>16}: {v:,.6f}")
         else:
             print(f"{k:>16}: {v}")
-
+    print(results["stratDf"])
+    plotDf =results["plotDf"]
     # showTrades(results)
 
-    eq = results["equity_curve"]
-    bh = results.get("buy_and_hold")
-
     plt.figure()
-    plt.plot(eq.index, eq["Equity"], label="Strategy Equity")
-    if bh is not None:
-        plt.plot(bh.index, bh.values, label="Buy & Hold QQQ")
+    for row in plotDf.itertuples():
+        plt.plot(row.index, row.values, label=row.name)
     plt.title("Equity Curve: Strategy vs Buy & Hold QQQ")
     plt.xlabel("Date")
     plt.ylabel("Equity ($)")

@@ -6,19 +6,13 @@ C:\Neeraj\backup\tech\systematicinv\backtrader\PycharmProjects\venv\Scripts\pyth
              end: 2025-12-29
      expiry_mode: monthly_3rd_friday
       vol_source: vxn_then_hv
- starting_equity: 8,000.000000
-   ending_equity: 46,607.518973
-bh_ending_equity: 114,728.410004
-            CAGR:     6.80%
-         bh_CAGR:    10.44%
-          Sharpe: 0.418547
-       bh_Sharpe: 0.422201
-    max_drawdown:   -46.65%
- bh_max_drawdown:   -82.96%
           trades: 57
             wins: 41
           losses: 16
-        win_rate:    71.93%
+        win_rate: 71.929825
    profit_factor: 3.774331
+           name         end_eq       cagr       mdd    sharpe
+0     OptionRSI   46607.518973   6.795198 -46.65278  0.418547
+1  buy_and_hold  114728.410004  10.444952 -82.96255  0.422201
 
 Process finished with exit code 0
