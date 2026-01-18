@@ -333,23 +333,26 @@ def backtest(
                 target_price=float(entry_px) * (1 + profit_take),
                 cost_basis=float(cost),
             )
+    trades_df = pd.DataFrame(trades)
+    losses, profit_factor, win_rate, wins = trade_stats(trades_df)
 
-    stratDf = pd.DataFrame(columns=["name", "end_eq", "cagr", "mdd", "sharpe"])
+    stratDf = pd.DataFrame(columns=["name", "end_eq", "cagr", "mdd", "sharpe", "losses", "profit_factor", "win_rate", "wins", "trades"])
     plotDf = pd.DataFrame(columns=["name", "index", "values"])
     eq = pd.DataFrame(equity_curve).set_index("Date")
     rf_daily = data["r"].reindex(eq.index).ffill() / 252.0
 
     _, _, end_eq, cagr, mdd, sharpe = OptionRSI.calculate_metrics(eq, rf_daily)
-    stratDf.loc[len(stratDf)] = ["OptionRSI", end_eq, cagr*100, mdd*100, sharpe]
+    stratDf.loc[len(stratDf)] = ["OptionRSI", end_eq, cagr*100, mdd*100, sharpe, losses, profit_factor, win_rate*100, wins, len(trades_df)]
     plotDf.loc[len(plotDf)] = ["OptionRSI", eq.index, eq["Equity"]]
 
     # Buy-and-hold underlying QQQ comparison (uses fractional shares for simplicity)
     buy_and_hold, bh_end, bh_cagr, bh_mdd, bh_sharpe = calculate_buy_and_hold(data, starting_cash, rf_daily)
-    stratDf.loc[len(stratDf)] = ["buy_and_hold", bh_end, bh_cagr*100, bh_mdd*100, bh_sharpe]
+    stratDf.loc[len(stratDf)] = ["buy_and_hold", bh_end, bh_cagr*100, bh_mdd*100, bh_sharpe, 0, float("nan"), float("nan"), 0, 0]
     plotDf.loc[len(plotDf)] = ["buy_and_hold", buy_and_hold.index, buy_and_hold.values]
 
+    return stratDf, plotDf, trades_df
 
-    trades_df = pd.DataFrame(trades)
+def trade_stats(trades_df):
     if len(trades_df) > 0:
         wins = int((trades_df["pnl_$"] > 0).sum())
         losses = int((trades_df["pnl_$"] <= 0).sum())
@@ -363,31 +366,12 @@ def backtest(
         wins = losses = 0
         win_rate = float("nan")
         profit_factor = float("nan")
-
-    return {
-        "equity_curve": eq,
-        "trades": trades_df,
-        "buy_and_hold": buy_and_hold,  # series with buy-and-hold equity
-        "stratDf": stratDf,
-        "plotDf": plotDf,
-        "summary": {
-            "symbol": symbol,
-            "start": start,
-            "end": end,
-            "expiry_mode": expiry_mode,
-            "vol_source": vol_source,
-            "trades": len(trades_df),
-            "wins": wins,
-            "losses": losses,
-            "win_rate": win_rate*100,
-            "profit_factor": profit_factor,
-        }
-    }
+    return losses, profit_factor, win_rate, wins
 
 
 def main():
     # Change these if you want:
-    results = backtest(
+    stratDf, plotDf, trades_df = backtest(
         bs_model=BlackScholesModel(q=0.00),
         entryExit=EntryExit(
             entry_rsi_low=30.0,
@@ -396,7 +380,6 @@ def main():
             profit_take=0.50,
         ),
         symbol= STOCK_SYMBOL,
-        #symbol="qqq.us",
         start=START_DATE,
         end=END_DATE,
         expiry_mode="monthly_3rd_friday",   # try "leaps_jan_3rd_friday"
@@ -406,44 +389,48 @@ def main():
         commission_per_contract=0.0,
     )
 
-    s = results["summary"]
-    print("\n=== SUMMARY ===")
-    for k, v in s.items():
-        if isinstance(v, float):
-            print(f"{k:>16}: {v:,.6f}")
-        else:
-            print(f"{k:>16}: {v}")
-    print(results["stratDf"])
-    plotDf =results["plotDf"]
-    # showTrades(results)
+    print_summary(stratDf)
+    # showTrades(trades_df)
+    plot_plotdf(plotDf, title="Equity Curve: Strategies QQQ", xlablel="Date", ylabel="Equity ($)")
 
+def plot_plotdf(plotDf, title, xlablel, ylabel):
     plt.figure()
     for row in plotDf.itertuples():
         plt.plot(row.index, row.values, label=row.name)
-    plt.title("Equity Curve: Strategy vs Buy & Hold QQQ")
-    plt.xlabel("Date")
-    plt.ylabel("Equity ($)")
+    plt.title(title)
+    plt.xlabel(xlablel)
+    plt.ylabel(ylabel)
     plt.legend()
     plt.tight_layout()
     plt.show()
 
 
-def showTrades(results):
+def print_summary(stratDf):
+    print("\n=== SUMMARY ===")
+    print(f"symbol  : {STOCK_SYMBOL}")
+    print(f"start   : {START_DATE}")
+    print(f"end     : {END_DATE}")
+    print(f"expiry_mode : monthly_3rd_friday")
+    print(f"vol_source  : vxn_then_hv")
+    with pd.option_context('display.float_format', '{:,.2f}'.format,
+                           'display.max_columns', None, 'display.max_rows', None):
+        print("\n=== STRATEGY METRICS ===")
+        print(stratDf.to_string(index=False))
+
+def showTrades(trades_df):
     print("\n=== TRADES ===")
-    t = results["trades"]
-    if len(t) == 0:
+    if len(trades_df) == 0:
         print("No trades.")
     else:
         cols = ["entry_date", "exit_date", "expiry", "K", "contracts",
                 "entry_price", "exit_price", "holding_days", "reason", "return_%", "pnl_$"]
-        out = t[cols].copy()
+        out = trades_df[cols].copy()
         out["K"] = out["K"].round(0).astype(int)
         out["entry_price"] = out["entry_price"].round(2)
         out["exit_price"] = out["exit_price"].round(2)
         out["return_%"] = out["return_%"].round(2)
         out["pnl_$"] = out["pnl_$"].round(2)
         print(out.to_string(index=False))
-
 
 if __name__ == "__main__":
     main()

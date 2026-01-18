@@ -1,18 +1,15 @@
 C:\Neeraj\backup\tech\systematicinv\backtrader\PycharmProjects\venv\Scripts\python.exe C:\Neeraj\backup\tech\systematicinv\surajchand_bt\btcp.py
 
 === SUMMARY ===
-          symbol: QQQ.US
-           start: 1995-01-01
-             end: 2025-12-29
-     expiry_mode: monthly_3rd_friday
-      vol_source: vxn_then_hv
-          trades: 57
-            wins: 41
-          losses: 16
-        win_rate: 71.929825
-   profit_factor: 3.774331
-           name         end_eq       cagr       mdd    sharpe
-0     OptionRSI   46607.518973   6.795198 -46.65278  0.418547
-1  buy_and_hold  114728.410004  10.444952 -82.96255  0.422201
+symbol  : QQQ.US
+start   : 1995-01-01
+end     : 2025-12-29
+expiry_mode : monthly_3rd_friday
+vol_source  : vxn_then_hv
+
+=== STRATEGY METRICS ===
+        name     end_eq  cagr    mdd  sharpe  losses  profit_factor  win_rate  wins  trades
+   OptionRSI  46,607.52  6.80 -46.65    0.42      16           3.77     71.93    41      57
+buy_and_hold 114,728.41 10.44 -82.96    0.42       0            NaN       NaN     0       0
 
 Process finished with exit code 0
