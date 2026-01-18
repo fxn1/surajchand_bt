@@ -1,13 +1,21 @@
 import math
 import pandas as pd
+from Portfolio import Portfolio, Position
 
 class EntryExit:
-    def __init__(self,
-                    entry_rsi_low: float = 30.0,
-                    entry_rsi_high: float = 50.0,
-                    hold_days: int = 180,
-                    profit_take: float = 0.50):
+    def __init__(self):
+        self.entry_rsi_low: float = 30.0
+        self.entry_rsi_high: float = 50.0
+        self.hold_days: int = 180
+        self.profit_take: float = 0.50
+        self.portfolio: Portfolio = Portfolio(
+            cash = 0.0,
+            pos = None,
+            trades = [],
+            equity_curve = []
+        )
 
+    def setRsiHoldProfit(self, entry_rsi_low: float = 30.0, entry_rsi_high: float = 50.0, hold_days: int = 180, profit_take: float = 0.50):
         self.entry_rsi_low = entry_rsi_low
         self.entry_rsi_high = entry_rsi_high
         self.hold_days = hold_days

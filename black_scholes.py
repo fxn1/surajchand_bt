@@ -24,7 +24,7 @@ class BlackScholesModel:
         :param sigma: Volatility.
         :return: Tuple of (call price, delta).
         """
-        if T <= 0 or sigma <= 0 or not math.isfinite(sigma):
+        if T <= 0 or sigma <= 0 or not math.isfinite(sigma):  ## expired option has intrinsic value only
             call = max(S - K, 0.0)
             delta = 1.0 if S > K else 0.0
             return call, delta
