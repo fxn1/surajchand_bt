@@ -3,7 +3,8 @@ import pandas as pd
 from Portfolio import Portfolio, Position
 
 class EntryExit:
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         self.entry_rsi_low: float = 30.0
         self.entry_rsi_high: float = 50.0
         self.hold_days: int = 180

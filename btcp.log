@@ -9,7 +9,8 @@ vol_source  : vxn_then_hv
 
 === STRATEGY METRICS ===
         name     end_eq  cagr    mdd  sharpe  losses  profit_factor  win_rate  wins  trades
-   OptionRSI  46,607.52  6.80 -46.65    0.42      16           3.77     71.93    41      57
+entry_rsi_30  46,607.52  6.80 -46.65    0.42      16           3.77     71.93    41      57
+entry_rsi_20  54,068.78  7.39 -61.33    0.42      19           3.49     70.77    46      65
 buy_and_hold 114,728.41 10.44 -82.96    0.42       0            NaN       NaN     0       0
 
 Process finished with exit code 0

@@ -19,3 +19,8 @@ class Portfolio:
     pos: Optional[Position]
     trades: List[Dict[str, object]]
     equity_curve: List[Dict[str, object]]
+
+def max_drawdown(equity: pd.Series) -> float:
+    peak = equity.cummax()
+    dd = equity / peak - 1.0
+    return float(dd.min())

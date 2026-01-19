@@ -1,11 +1,7 @@
 import pandas as pd
 from math import sqrt
 from typing import Tuple
-
-def max_drawdown(equity: pd.Series) -> float:
-    peak = equity.cummax()
-    dd = equity / peak - 1.0
-    return float(dd.min())
+from Portfolio import max_drawdown
 
 class OptionRSI:
     @staticmethod
@@ -35,4 +31,4 @@ class OptionRSI:
         daily_excess = (daily_ret - rf_daily).dropna()
         sharpe = float(daily_excess.mean() / daily_excess.std() * sqrt(252)) if len(daily_excess) > 1 and daily_excess.std() > 0 else float("nan")
 
-        return equity, start_eq, end_eq, cagr, mdd, sharpe
+        return end_eq, cagr, mdd, sharpe
