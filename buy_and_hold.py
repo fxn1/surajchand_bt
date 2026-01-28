@@ -1,6 +1,6 @@
 import pandas as pd
 from math import sqrt
-from Portfolio import Portfolio,max_drawdown
+from Portfolio import max_drawdown
 
 class BuyAndHold:
     def __init__(self, starting_cash: float):

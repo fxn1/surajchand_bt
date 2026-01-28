@@ -40,7 +40,7 @@ class EntryExit:
             return False
         return True
 
-    def check_exit_conditions(self, holding: int, px: float, target_price: float) -> bool:
+    def check_exit_conditions(self, holding: int, px: float) -> bool:
         """
         Check if the exit criteria are met.
         :param holding: Number of holding days.
@@ -48,6 +48,6 @@ class EntryExit:
         :param target_price: Target price.
         :return: True if exit criteria are met, False otherwise.
         """
-        hit_profit = px >= target_price
+        hit_profit = px >= self.portfolio.pos.target_price
         hit_time = holding >= self.hold_days
         return hit_profit, hit_profit or hit_time

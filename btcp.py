@@ -34,7 +34,7 @@ from black_scholes import BlackScholesModel
 from criteria import EntryExit
 from buy_and_hold import BuyAndHold
 from option_rsi import OptionRSI
-from Portfolio import Position
+from Portfolio import Position, trade_stats
 
 ##############
 
@@ -255,7 +255,7 @@ def backtest(
                 equity = entryExit.portfolio.cash + pos_value
 
                 holding = (d - entryExit.portfolio.pos.entry_date).days
-                hit_profit, exit_true = entryExit.check_exit_conditions(holding, px, entryExit.portfolio.pos.target_price)
+                hit_profit, exit_true = entryExit.check_exit_conditions(holding, px)
                 if exit_true:
                     entryExit.portfolio.cash += pos_value
                     entryExit.portfolio.cash -= commission_per_contract * entryExit.portfolio.pos.contracts
@@ -343,24 +343,6 @@ def backtest(
     plotDf.loc[len(plotDf)] = ["buy_and_hold", buy_and_hold.index, buy_and_hold.values]
 
     return stratDf, plotDf
-
-def trade_stats(trades):
-    trades_df = pd.DataFrame(trades)
-    if len(trades_df) > 0:
-        wins = int((trades_df["pnl_$"] > 0).sum())
-        losses = int((trades_df["pnl_$"] <= 0).sum())
-        win_rate = wins / len(trades_df)
-        profit_factor = (
-            trades_df.loc[trades_df["pnl_$"] > 0, "pnl_$"].sum()
-            / abs(trades_df.loc[trades_df["pnl_$"] <= 0, "pnl_$"].sum())
-            if losses > 0 else float("inf")
-        )
-    else:
-        wins = losses = 0
-        win_rate = float("nan")
-        profit_factor = float("nan")
-    return losses, profit_factor, win_rate, wins
-
 
 def main():
     # Change these if you want:
