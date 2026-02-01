@@ -1,6 +1,6 @@
 import math
 import pandas as pd
-from Portfolio import Portfolio, Position
+from Portfolio import Portfolio
 
 class EntryExit:
     def __init__(self, name):
@@ -9,12 +9,7 @@ class EntryExit:
         self.entry_rsi_high: float = 50.0
         self.hold_days: int = 180
         self.profit_take: float = 0.50
-        self.portfolio: Portfolio = Portfolio(
-            cash = 0.0,
-            pos = None,
-            trades = [],
-            equity_curve = []
-        )
+        self.portfolio: Portfolio = Portfolio()
 
     def setRsiHoldProfit(self, entry_rsi_low: float = 30.0, entry_rsi_high: float = 50.0, hold_days: int = 180, profit_take: float = 0.50):
         self.entry_rsi_low = entry_rsi_low
@@ -48,6 +43,6 @@ class EntryExit:
         :param target_price: Target price.
         :return: True if exit criteria are met, False otherwise.
         """
-        hit_profit = px >= self.portfolio.pos.target_price
+        hit_profit = px >= self.portfolio.posn.target_price
         hit_time = holding >= self.hold_days
         return hit_profit, hit_profit or hit_time

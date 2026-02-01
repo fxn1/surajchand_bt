@@ -248,33 +248,33 @@ def backtest(
         for row in entryExit_df.itertuples():
             entryExit = row.entryExit
             # Mark-to-market
-            if entryExit.portfolio.pos is not None:
-                T = max((entryExit.portfolio.pos.expiry - d).days / 365.0, 1 / 365.0)
-                px, _ = bs_model.bs_call_price_delta(S, entryExit.portfolio.pos.K, T, r, q, sigma)
-                pos_value = px * 100 * entryExit.portfolio.pos.contracts
+            if entryExit.portfolio.posn.contracts > 0:
+                T = max((entryExit.portfolio.posn.expiry - d).days / 365.0, 1 / 365.0)
+                px, _ = bs_model.bs_call_price_delta(S, entryExit.portfolio.posn.K, T, r, q, sigma)
+                pos_value = px * 100 * entryExit.portfolio.posn.contracts
                 equity = entryExit.portfolio.cash + pos_value
 
-                holding = (d - entryExit.portfolio.pos.entry_date).days
+                holding = (d - entryExit.portfolio.posn.entry_date).days
                 hit_profit, exit_true = entryExit.check_exit_conditions(holding, px)
                 if exit_true:
                     entryExit.portfolio.cash += pos_value
-                    entryExit.portfolio.cash -= commission_per_contract * entryExit.portfolio.pos.contracts
+                    entryExit.portfolio.cash -= commission_per_contract * entryExit.portfolio.posn.contracts
 
-                    entryExit.portfolio.trades.append({
-                        "entry_date": entryExit.portfolio.pos.entry_date.date(),
+                    entryExit.portfolio.posn.trades.append({
+                        "entry_date": entryExit.portfolio.posn.entry_date.date(),
                         "exit_date": d.date(),
-                        "expiry": entryExit.portfolio.pos.expiry.date(),
-                        "K": entryExit.portfolio.pos.K,
-                        "contracts": entryExit.portfolio.pos.contracts,
-                        "entry_price": entryExit.portfolio.pos.entry_price,
+                        "expiry": entryExit.portfolio.posn.expiry.date(),
+                        "K": entryExit.portfolio.posn.K,
+                        "contracts": entryExit.portfolio.posn.contracts,
+                        "entry_price": entryExit.portfolio.posn.entry_price,
                         "exit_price": px,
                         "holding_days": holding,
                         "reason": "profit_target" if hit_profit else "time_exit",
-                        "pnl_$": pos_value - entryExit.portfolio.pos.cost_basis,
-                        "return_%": (px - entryExit.portfolio.pos.entry_price) / entryExit.portfolio.pos.entry_price * 100.0,
+                        "pnl_$": pos_value - entryExit.portfolio.posn.cost_basis,
+                        "return_%": (px - entryExit.portfolio.posn.entry_price) / entryExit.portfolio.posn.entry_price * 100.0,
                     })
 
-                    entryExit.portfolio.pos = None
+                    entryExit.portfolio.posn.contracts = 0
                     equity = entryExit.portfolio.cash
 
             else:
@@ -283,7 +283,7 @@ def backtest(
             entryExit.portfolio.equity_curve.append({"Date": d, "Equity": equity})
 
             # Entries
-            if entryExit.portfolio.pos is None:
+            if entryExit.portfolio.posn.contracts <= 0:
                 if not entryExit.check_entry_conditions(d, end_ts, rsi, sigma):
                     continue
 
@@ -314,15 +314,7 @@ def backtest(
                         continue
 
                 entryExit.portfolio.cash -= cost
-                entryExit.portfolio.pos = Position(
-                    entry_date=d,
-                    expiry=expiry,
-                    K=float(K),
-                    contracts=int(contracts),
-                    entry_price=float(entry_px),
-                    target_price=float(entry_px) * (1 + profit_take),
-                    cost_basis=float(cost),
-                )
+                entryExit.portfolio.posn.updposn(d, expiry, K, contracts, entry_px, profit_take, cost)
 
     stratDf = pd.DataFrame(columns=["name", "end_eq", "cagr", "mdd", "sharpe", "losses", "profit_factor", "win_rate", "wins", "trades"])
     plotDf = pd.DataFrame(columns=["name", "index", "values"])
@@ -331,9 +323,9 @@ def backtest(
         eq = pd.DataFrame(entryExit.portfolio.equity_curve).set_index("Date")
         rf_daily = data["r"].reindex(eq.index).ffill() / 252.0
 
-        losses, profit_factor, win_rate, wins = trade_stats(entryExit.portfolio.trades)
+        losses, profit_factor, win_rate, wins = trade_stats(entryExit.portfolio.posn.trades)
         end_eq, cagr, mdd, sharpe = OptionRSI.calculate_metrics(eq, rf_daily)
-        stratDf.loc[len(stratDf)] = [entryExit.name, end_eq, cagr*100, mdd*100, sharpe, losses, profit_factor, win_rate*100, wins, len(entryExit.portfolio.trades)]
+        stratDf.loc[len(stratDf)] = [entryExit.name, end_eq, cagr*100, mdd*100, sharpe, losses, profit_factor, win_rate*100, wins, len(entryExit.portfolio.posn.trades)]
         plotDf.loc[len(plotDf)] = [entryExit.name, eq.index, eq["Equity"]]
 
     # Buy-and-hold underlying QQQ comparison (uses fractional shares for simplicity)
