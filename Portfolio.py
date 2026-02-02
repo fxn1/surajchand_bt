@@ -1,12 +1,13 @@
 import pandas as pd
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional
+from typing import List, Dict
+
 
 @dataclass
 class Position:
     entry_date: pd.Timestamp = pd.Timestamp.min
     expiry: pd.Timestamp = pd.Timestamp.min
-    K: float = 0.0
+    strike: float = 0.0
     contracts: int = 0
     entry_price: float = 0.0
     target_price: float = 0.0
@@ -18,7 +19,7 @@ class Position:
 
         self.entry_date = d
         self.expiry = expiry
-        self.K = K
+        self.strike = K
         self.contracts = contracts
         self.entry_price = entry_px
         self.target_price = entry_px * (1 + profit_take)

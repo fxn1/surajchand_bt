@@ -191,7 +191,7 @@ def backtest(
     strike_round: float = 1.0,
     starting_cash: float = 8_000.0,
     position_size_pct: float = 0.95,
-    commission_per_contract: float = 0.0,
+    commission_per_contract: float = 0.65,
 ) -> Dict[str, object]:
 
     # Load underlying
@@ -250,7 +250,7 @@ def backtest(
             # Mark-to-market
             if entryExit.portfolio.posn.contracts > 0:
                 T = max((entryExit.portfolio.posn.expiry - d).days / 365.0, 1 / 365.0)
-                px, _ = bs_model.bs_call_price_delta(S, entryExit.portfolio.posn.K, T, r, q, sigma)
+                px, _ = bs_model.bs_call_price_delta(S, entryExit.portfolio.posn.strike, T, r, q, sigma)
                 pos_value = px * 100 * entryExit.portfolio.posn.contracts
                 equity = entryExit.portfolio.cash + pos_value
 
@@ -264,7 +264,7 @@ def backtest(
                         "entry_date": entryExit.portfolio.posn.entry_date.date(),
                         "exit_date": d.date(),
                         "expiry": entryExit.portfolio.posn.expiry.date(),
-                        "K": entryExit.portfolio.posn.K,
+                        "K": entryExit.portfolio.posn.strike,
                         "contracts": entryExit.portfolio.posn.contracts,
                         "entry_price": entryExit.portfolio.posn.entry_price,
                         "exit_price": px,
@@ -356,7 +356,7 @@ def main():
         vol_source="vxn_then_hv",          # safer than pure "vxn"
         use_fred_rate=True,
         position_size_pct=0.10,
-        commission_per_contract=0.0,
+        commission_per_contract=0.65,
     )
 
     print_summary(stratDf)
