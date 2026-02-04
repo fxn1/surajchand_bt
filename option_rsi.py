@@ -3,9 +3,10 @@ from math import sqrt
 from typing import Tuple
 from Portfolio import max_drawdown
 
+
 class OptionRSI:
     @staticmethod
-    def calculate_metrics(equity_curve: pd.DataFrame, rf_daily: pd.Series) -> Tuple[float, float, float, float, float]:
+    def calculate_metrics(equity_curve: pd.DataFrame, rf_daily: pd.Series) -> Tuple[float, float, float, float]:
         """
         Calculate strategy metrics based on the equity curve.
 
@@ -14,7 +15,7 @@ class OptionRSI:
             rf_daily (pd.Series): Daily risk-free rate series.
 
         Returns:
-            Tuple[float, float, float, float, float]: equity, end equity, CAGR, max drawdown, Sharpe ratio.
+            Tuple[float, float, float, float]: end equity, CAGR, max drawdown, Sharpe ratio.
         """
         equity_curve = equity_curve.asfreq("B", method="ffill")
         equity = equity_curve["Equity"]
