@@ -254,17 +254,17 @@ def backtest(
                 pos_value = px * 100 * open_trade.contracts
                 equity = entryExit.portfolio.cash + pos_value
 
-                # holding = (d - open_trade.entry_date).days
                 holding = open_trade.holding(d)
                 hit_profit, exit_true = entryExit.check_exit_conditions(holding, px, open_trade)
                 if exit_true:
+                    # print(f"{entryExit.name} | {d.date()} | Exit Trade K={posn.strike} Exp={posn.expiry.date()} | holding={holding} days | Px=${px:.2f} TPx=${open_trade.target_price:.2f} | PosValue=${pos_value:,.2f} | Equity=${equity:,.2f}, hold_dayl={entryExit.hold_days}")
                     entryExit.portfolio.cash += pos_value
                     entryExit.portfolio.cash -= commission_per_contract * open_trade.contracts
                     open_trade.exit_price = px
                     open_trade.exit_time = d  # open_trade is now closed
 
                     entryExit.report.append({
-                        "entry_date": open_trade.entry_date.date(),
+                        "entry_date": open_trade.entry_time.date(),
                         "exit_date": d.date(),
                         "expiry": posn.expiry.date(),
                         "K": posn.strike,
@@ -276,9 +276,7 @@ def backtest(
                         "pnl_$": pos_value - open_trade.cost_basis,
                         "return_%": open_trade.total_ret(px),
                     })
-
                     equity = entryExit.portfolio.cash
-
             else:
                 equity = entryExit.portfolio.cash
 
@@ -316,7 +314,8 @@ def backtest(
                         continue
 
                 entryExit.portfolio.cash -= cost
-                entryExit.portfolio.add_position("TODO", K, expiry, contracts, d, entry_px, profit_take, cost)
+                open_trade, posn = entryExit.portfolio.add_position("TODO", K, expiry, contracts, d, entry_px, profit_take, cost)
+                # print(f"{entryExit.name} | {d.date()} add_posn K={K} Exp={expiry.date()} entry_px=${entry_px:.2f} TPx=${open_trade.target_price:.2f} contracts={contracts} cost=${cost:,.2f} cash_left=${entryExit.portfolio.cash:,.2f}")
 
     stratDf = pd.DataFrame(columns=["name", "end_eq", "cagr", "mdd", "sharpe", "losses", "profit_factor", "win_rate", "wins", "trades"])
     plotDf = pd.DataFrame(columns=["name", "index", "values"])

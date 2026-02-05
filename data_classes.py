@@ -45,17 +45,11 @@ class OptionTrade:
 
     @property
     def is_open(self) -> bool:
-        return self.exit_time is None
+        return self.exit_time == pd.Timestamp.min
 
-    @property
     def holding(self, d: pd.Timestamp) -> int:
-        exit_day = d.now() if self.is_open else self.exit_time
-        return (exit_day - self.entry_time).day
-
-    def num_trades(self) -> int:
-        if self.is_open:
-            return 1
-        return 2
+        exit_day = d if self.is_open else self.exit_time
+        return (exit_day - self.entry_time).days
 
     def unrealised_pnl(self, current_price: float) -> float:
         return (current_price - self.entry_price) * self.contracts * 100
@@ -90,7 +84,7 @@ class OptionPosition:
         return None
 
     def num_trades(self) -> int:
-        return sum(trade.num_trades() for trade in self.trades)
+        return len(self.trades)
 
     def posn_contracts(self) -> int:
         return sum(trade.contracts for trade in self.trades if not trade.is_open)
