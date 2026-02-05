@@ -257,6 +257,7 @@ def backtest(
                 holding = (d - entryExit.portfolio.posn.entry_date).days
                 hit_profit, exit_true = entryExit.check_exit_conditions(holding, px)
                 if exit_true:
+                    # print(f"{entryExit.name} | {d.date()} Exit: S={S:.2f} K={entryExit.portfolio.posn.strike:.2f} exp={entryExit.portfolio.posn.expiry.date()} hit_profit={hit_profit} Tpx={entryExit.portfolio.posn.entry_price*(1+profit_take)} px={px:.2f} contracts={entryExit.portfolio.posn.contracts} pos_value=${pos_value:.2f} equity=${equity:.2f} rsi={rsi:.2f} sigma={sigma:.2f} holding_days={holding}")
                     entryExit.portfolio.cash += pos_value
                     entryExit.portfolio.cash -= commission_per_contract * entryExit.portfolio.posn.contracts
 
@@ -315,6 +316,7 @@ def backtest(
 
                 entryExit.portfolio.cash -= cost
                 entryExit.portfolio.posn.updposn(d, expiry, K, contracts, entry_px, profit_take, cost)
+                # print(f"{entryExit.name} | {d.date()} ENTRY: S={S:.2f} K={K:.2f} exp={expiry.date()} Tpx={entry_px*(1+profit_take)} px={entry_px:.2f} contracts={contracts} cost=${cost:.2f} rsi={rsi:.2f} sigma={sigma:.2f}")
 
     stratDf = pd.DataFrame(columns=["name", "end_eq", "cagr", "mdd", "sharpe", "losses", "profit_factor", "win_rate", "wins", "trades"])
     plotDf = pd.DataFrame(columns=["name", "index", "values"])
