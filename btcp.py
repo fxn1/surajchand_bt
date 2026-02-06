@@ -34,7 +34,7 @@ from black_scholes import BlackScholesModel
 from criteria import EntryExit
 from buy_and_hold import BuyAndHold
 from option_rsi import OptionRSI
-from Portfolio import trade_stats
+from data_classes import trade_stats
 
 ##############
 

@@ -1,9 +1,7 @@
 import math
 
 import pandas as pd
-from Portfolio import Portfolio
-from data_classes import OptionTrade
-from dataclasses import dataclass, field
+from data_classes import OptionTrade, TradePortfolio
 
 
 class EntryExit:
@@ -13,7 +11,7 @@ class EntryExit:
         self.entry_rsi_high: float = 50.0
         self.hold_days: int = 180
         self.profit_take: float = 0.50
-        self.portfolio: Portfolio = Portfolio()
+        self.portfolio: TradePortfolio = TradePortfolio()
         self.report: List[Dict[str, object]] = []
 
     def setRsiHoldProfit(self, entry_rsi_low: float = 30.0, entry_rsi_high: float = 50.0, hold_days: int = 180, profit_take: float = 0.50):
