@@ -2,6 +2,7 @@ import pandas as pd
 from math import sqrt
 from Portfolio import max_drawdown
 
+
 class BuyAndHold:
     def __init__(self, starting_cash: float):
         self.starting_cash = starting_cash
@@ -34,4 +35,3 @@ class BuyAndHold:
             bh_sharpe = float("nan")
 
         return buy_and_hold, bh_end, bh_cagr, bh_mdd, bh_sharpe
-
