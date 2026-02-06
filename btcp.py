@@ -258,7 +258,7 @@ def backtest(
                 holding = open_trade.holding(d)
                 hit_profit, exit_true = entryExit.check_exit_conditions(holding, px, open_trade)
                 if exit_true:
-                    # print(f"{entryExit.name} | {d.date()} | Exit Trade K={posn.strike} Exp={posn.expiry.date()} | holding={holding} days | Px=${px:.2f} TPx=${open_trade.target_price:.2f} | PosValue=${pos_value:,.2f} | Equity=${equity:,.2f}, hold_dayl={entryExit.hold_days}")
+                    # print(f"{entryExit.name} | {d.date()} Exit: S={S} K={posn.strike} exp={posn.expiry.date()} hit_profit={hit_profit} Tpx=${open_trade.target_price:.2f} px=${px:.2f}  contracts={open_trade.contracts} pos_value=${pos_value:,.2f} equity=${equity:,.2f} rsi={rsi} sigma={sigma} holding_days={holding}")
                     entryExit.portfolio.cash += pos_value
                     entryExit.portfolio.cash -= commission_per_contract * open_trade.contracts
                     open_trade.exit_price = px
@@ -316,7 +316,7 @@ def backtest(
 
                 entryExit.portfolio.cash -= cost
                 open_trade, posn = entryExit.portfolio.add_position("TODO", K, expiry, contracts, d, entry_px, profit_take, cost)
-                # print(f"{entryExit.name} | {d.date()} add_posn K={K} Exp={expiry.date()} entry_px=${entry_px:.2f} TPx=${open_trade.target_price:.2f} contracts={contracts} cost=${cost:,.2f} cash_left=${entryExit.portfolio.cash:,.2f}")
+                # print(f"{entryExit.name} | {d.date()} ENTRY: S={S} K={K} exp={expiry.date()} Tpx=${open_trade.target_price:.2f} px=${entry_px:.2f} contracts={contracts} cost=${cost:,.2f} rsi={rsi} sigma={sigma}")
 
     stratDf = pd.DataFrame(columns=["name", "end_eq", "cagr", "mdd", "sharpe", "losses", "profit_factor", "win_rate", "wins", "trades"])
     plotDf = pd.DataFrame(columns=["name", "index", "values"])

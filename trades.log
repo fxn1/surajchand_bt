@@ -1,0 +1,244 @@
+entry_rsi_20 | 1999-04-22 ENTRY: S=46.2895 K=32.0 exp=2000-04-20 Tpx=$25.32 px=$16.88 contracts=1 cost=$1,688.86 rsi=57.22546642071409 sigma=0.3975790287422722
+entry_rsi_30 | 1999-05-04 ENTRY: S=44.59 K=30.0 exp=2000-05-19 Tpx=$25.55 px=$17.03 contracts=1 cost=$1,703.65 rsi=47.51145845272619 sigma=0.39643225059821785
+entry_rsi_30 | 1999-10-11 Exit: S=54.8169 K=30.0 exp=2000-05-19 hit_profit=True Tpx=$25.55 px=$25.78  contracts=1 pos_value=$2,577.81 qquity=$8,874.16 rsi=65.3142315152052 sigma=0.27202495135614657 holding_days=160
+entry_rsi_30 | 1999-10-13 ENTRY: S=51.9838 K=39.0 exp=2000-10-20 Tpx=$23.80 px=$15.87 contracts=1 cost=$1,587.24 rsi=48.66443898903184 sigma=0.2917953094714415
+entry_rsi_20 | 1999-10-19 Exit: S=50.396 K=32.0 exp=2000-04-20 hit_profit=False Tpx=$25.32 px=$19.28  contracts=1 pos_value=$1,928.40 qquity=$8,239.55 rsi=42.322202384804505 sigma=0.2761560809964642 holding_days=180
+entry_rsi_20 | 1999-10-19 ENTRY: S=50.396 K=39.0 exp=2000-10-20 Tpx=$21.39 px=$14.26 contracts=1 cost=$1,426.55 rsi=42.322202384804505 sigma=0.2761560809964642
+entry_rsi_20 | 1999-11-08 Exit: S=58.9773 K=39.0 exp=2000-10-20 hit_profit=True Tpx=$21.39 px=$22.14  contracts=1 pos_value=$2,214.23 qquity=$9,026.58 rsi=74.61760983700715 sigma=0.26911534288924105 holding_days=20
+entry_rsi_30 | 1999-11-12 Exit: S=61.205 K=39.0 exp=2000-10-20 hit_profit=True Tpx=$23.80 px=$24.28  contracts=1 pos_value=$2,428.05 qquity=$9,714.32 rsi=78.1893279922291 sigma=0.2643230852508096 holding_days=30
+entry_rsi_20 | 1999-11-30 ENTRY: S=62.3184 K=48.0 exp=2000-12-15 Tpx=$26.95 px=$17.97 contracts=1 cost=$1,797.27 rsi=59.87206853751338 sigma=0.26937055373968655
+entry_rsi_20 | 1999-12-21 Exit: S=75.8334 K=48.0 exp=2000-12-15 hit_profit=True Tpx=$26.95 px=$30.81  contracts=1 pos_value=$3,081.22 qquity=$10,309.87 rsi=81.53951327589085 sigma=0.28789940039769024 holding_days=21
+entry_rsi_20 | 2000-01-04 ENTRY: S=74.8204 K=52.0 exp=2001-01-19 Tpx=$41.47 px=$27.65 contracts=1 cost=$2,765.31 rsi=58.65908365658321 sigma=0.3855314394773757
+entry_rsi_30 | 2000-01-06 ENTRY: S=67.911 K=45.0 exp=2001-01-19 Tpx=$41.27 px=$27.51 contracts=1 cost=$2,752.05 rsi=42.57958811437547 sigma=0.44889104728325896
+entry_rsi_30 | 2000-01-19 Exit: S=81.3889 K=45.0 exp=2001-01-19 hit_profit=True Tpx=$41.27 px=$41.27  contracts=1 pos_value=$4,127.11 qquity=$11,088.72 rsi=62.43089907651962 sigma=0.5835983674451686 holding_days=13
+entry_rsi_30 | 2000-01-28 ENTRY: S=72.9132 K=42.0 exp=2001-02-16 Tpx=$55.08 px=$36.72 contracts=1 cost=$3,672.32 rsi=45.571273031040015 sigma=0.6359616344084733
+entry_rsi_20 | 2000-02-08 Exit: S=87.0091 K=52.0 exp=2001-01-19 hit_profit=True Tpx=$41.47 px=$41.92  contracts=1 pos_value=$4,191.91 qquity=$11,735.83 rsi=66.27272584928828 sigma=0.6472058300740338 holding_days=35
+entry_rsi_20 | 2000-02-08 ENTRY: S=87.0091 K=50.0 exp=2001-02-16 Tpx=$65.78 px=$43.85 contracts=1 cost=$4,385.89 rsi=66.27272584928828 sigma=0.6472058300740338
+entry_rsi_30 | 2000-03-06 Exit: S=94.9008 K=42.0 exp=2001-02-16 hit_profit=True Tpx=$55.08 px=$55.60  contracts=1 pos_value=$5,560.44 qquity=$12,976.20 rsi=67.30525103783975 sigma=0.4702942080338296 holding_days=38
+entry_rsi_30 | 2000-03-15 ENTRY: S=87.2214 K=59.0 exp=2001-03-16 Tpx=$51.06 px=$34.04 contracts=1 cost=$3,404.89 rsi=46.937009767497486 sigma=0.43239420653192256
+entry_rsi_20 | 2000-08-07 Exit: S=78.2112 K=50.0 exp=2001-02-16 hit_profit=False Tpx=$65.78 px=$30.19  contracts=1 pos_value=$3,018.89 qquity=$10,368.18 rsi=48.744467207224695 sigma=0.40353822778754206 holding_days=181
+entry_rsi_20 | 2000-08-07 ENTRY: S=78.2112 K=54.0 exp=2001-08-17 Tpx=$44.09 px=$29.39 contracts=1 cost=$2,940.13 rsi=48.744467207224695 sigma=0.40353822778754206
+entry_rsi_30 | 2000-09-11 Exit: S=78.6809 K=59.0 exp=2001-03-16 hit_profit=False Tpx=$51.06 px=$22.09  contracts=1 pos_value=$2,209.11 qquity=$11,779.76 rsi=42.73044703429116 sigma=0.3219774554466685 holding_days=180
+entry_rsi_30 | 2000-09-11 ENTRY: S=78.6809 K=58.0 exp=2001-09-21 Tpx=$38.44 px=$25.63 contracts=1 cost=$2,563.63 rsi=42.73044703429116 sigma=0.3219774554466685
+entry_rsi_20 | 2001-02-05 Exit: S=52.1423 K=54.0 exp=2001-08-17 hit_profit=False Tpx=$44.09 px=$8.17  contracts=1 pos_value=$816.96 qquity=$8,244.36 rsi=44.21206155911091 sigma=0.5585 holding_days=182
+entry_rsi_20 | 2001-02-05 ENTRY: S=52.1423 K=31.0 exp=2002-02-15 Tpx=$36.59 px=$24.40 contracts=1 cost=$2,440.15 rsi=44.21206155911091 sigma=0.5585
+entry_rsi_30 | 2001-03-12 Exit: S=35.862 K=58.0 exp=2001-09-21 hit_profit=False Tpx=$38.44 px=$2.11  contracts=1 pos_value=$210.64 qquity=$9,426.13 rsi=26.685614673056605 sigma=0.6809999999999999 holding_days=182
+entry_rsi_30 | 2001-03-13 ENTRY: S=37.6837 K=21.0 exp=2002-03-15 Tpx=$28.94 px=$19.29 contracts=1 cost=$1,930.13 rsi=33.330820070022455 sigma=0.6731
+entry_rsi_20 | 2001-08-06 Exit: S=36.0332 K=31.0 exp=2002-02-15 hit_profit=False Tpx=$36.59 px=$7.88  contracts=1 pos_value=$787.52 qquity=$6,591.08 rsi=49.35012491406903 sigma=0.4731 holding_days=182
+entry_rsi_20 | 2001-08-06 ENTRY: S=36.0332 K=23.0 exp=2002-08-16 Tpx=$22.41 px=$14.94 contracts=1 cost=$1,494.85 rsi=49.35012491406903 sigma=0.4731
+entry_rsi_30 | 2001-09-10 Exit: S=28.9106 K=21.0 exp=2002-03-15 hit_profit=False Tpx=$28.94 px=$9.41  contracts=1 pos_value=$940.68 qquity=$8,436.03 rsi=32.007250870106645 sigma=0.5740999999999999 holding_days=181
+entry_rsi_30 | 2001-09-10 ENTRY: S=28.9106 K=17.0 exp=2002-09-20 Tpx=$20.35 px=$13.57 contracts=1 cost=$1,357.27 rsi=32.007250870106645 sigma=0.5740999999999999
+entry_rsi_20 | 2002-02-04 Exit: S=31.2982 K=23.0 exp=2002-08-16 hit_profit=False Tpx=$22.41 px=$9.17  contracts=1 pos_value=$916.93 qquity=$6,012.51 rsi=37.723929682161604 sigma=0.4178 holding_days=182
+entry_rsi_20 | 2002-02-04 ENTRY: S=31.2982 K=20.0 exp=2003-02-21 Tpx=$18.70 px=$12.46 contracts=1 cost=$1,247.06 rsi=37.723929682161604 sigma=0.4178
+entry_rsi_30 | 2002-03-11 Exit: S=32.6619 K=17.0 exp=2002-09-20 hit_profit=False Tpx=$20.35 px=$15.91  contracts=1 pos_value=$1,591.17 qquity=$8,669.28 rsi=59.94250873897453 sigma=0.3847 holding_days=182
+entry_rsi_30 | 2002-03-14 ENTRY: S=31.2523 K=21.0 exp=2003-03-21 Tpx=$17.16 px=$11.44 contracts=1 cost=$1,144.92 rsi=49.770574088610395 sigma=0.3786
+entry_rsi_20 | 2002-08-05 Exit: S=18.1787 K=20.0 exp=2003-02-21 hit_profit=False Tpx=$18.70 px=$2.51  contracts=1 pos_value=$250.57 qquity=$5,015.37 rsi=35.44840340384279 sigma=0.5859000000000001 holding_days=182
+entry_rsi_20 | 2002-08-05 ENTRY: S=18.1787 K=10.0 exp=2003-08-15 Tpx=$13.43 px=$8.95 contracts=1 cost=$895.70 rsi=35.44840340384279 sigma=0.5859000000000001
+entry_rsi_30 | 2002-09-10 Exit: S=20.0502 K=21.0 exp=2003-03-21 hit_profit=False Tpx=$17.16 px=$2.62  contracts=1 pos_value=$261.66 qquity=$7,785.37 rsi=48.92219654016708 sigma=0.5069 holding_days=180
+entry_rsi_30 | 2002-09-10 ENTRY: S=20.0502 K=12.0 exp=2003-09-19 Tpx=$13.30 px=$8.87 contracts=1 cost=$887.31 rsi=48.92219654016708 sigma=0.5069
+entry_rsi_20 | 2002-11-21 Exit: S=23.508 K=10.0 exp=2003-08-15 hit_profit=True Tpx=$13.43 px=$13.63  contracts=1 pos_value=$1,362.84 qquity=$5,481.85 rsi=67.44159278639518 sigma=0.4021 holding_days=108
+entry_rsi_20 | 2002-11-21 ENTRY: S=23.508 K=15.0 exp=2003-11-21 Tpx=$13.78 px=$9.19 contracts=1 cost=$919.52 rsi=67.44159278639518 sigma=0.4021
+entry_rsi_30 | 2003-03-10 Exit: S=20.3538 K=12.0 exp=2003-09-19 hit_profit=False Tpx=$13.30 px=$8.50  contracts=1 pos_value=$850.45 qquity=$7,747.86 rsi=41.39371979625867 sigma=0.4253 holding_days=181
+entry_rsi_30 | 2003-03-10 ENTRY: S=20.3538 K=13.0 exp=2004-03-19 Tpx=$12.00 px=$8.00 contracts=1 cost=$800.90 rsi=41.39371979625867 sigma=0.4253
+entry_rsi_20 | 2003-05-20 Exit: S=23.5442 K=15.0 exp=2003-11-21 hit_profit=False Tpx=$13.78 px=$8.64  contracts=1 pos_value=$864.49 qquity=$5,426.18 rsi=50.72357427072666 sigma=0.2879 holding_days=180
+entry_rsi_20 | 2003-05-20 ENTRY: S=23.5442 K=17.0 exp=2004-05-21 Tpx=$10.61 px=$7.07 contracts=1 cost=$708.04 rsi=50.72357427072666 sigma=0.2879
+entry_rsi_30 | 2003-05-30 Exit: S=25.2601 K=13.0 exp=2004-03-19 hit_profit=True Tpx=$12.00 px=$12.38  contracts=1 pos_value=$1,238.36 qquity=$8,184.67 rsi=68.34753099364924 sigma=0.2834 holding_days=81
+entry_rsi_30 | 2003-06-24 ENTRY: S=25.1614 K=18.0 exp=2004-07-16 Tpx=$11.60 px=$7.73 contracts=1 cost=$773.66 rsi=49.91150720304687 sigma=0.2916
+entry_rsi_20 | 2003-07-08 Exit: S=27.3658 K=17.0 exp=2004-05-21 hit_profit=True Tpx=$10.61 px=$10.65  contracts=1 pos_value=$1,064.67 qquity=$5,782.16 rsi=68.17923986802188 sigma=0.3107 holding_days=49
+entry_rsi_20 | 2003-07-08 ENTRY: S=27.3658 K=19.0 exp=2004-07-16 Tpx=$13.47 px=$8.98 contracts=1 cost=$898.37 rsi=68.17923986802188 sigma=0.3107
+entry_rsi_30 | 2003-09-18 Exit: S=29.4852 K=18.0 exp=2004-07-16 hit_profit=True Tpx=$11.60 px=$11.71  contracts=1 pos_value=$1,171.40 qquity=$8,581.75 rsi=66.52100733252678 sigma=0.2749 holding_days=86
+entry_rsi_30 | 2003-09-24 ENTRY: S=28.1637 K=20.0 exp=2004-10-15 Tpx=$13.26 px=$8.84 contracts=1 cost=$884.49 rsi=48.32097669079496 sigma=0.29359999999999997
+entry_rsi_20 | 2004-01-05 Exit: S=31.4627 K=19.0 exp=2004-07-16 hit_profit=False Tpx=$13.47 px=$12.60  contracts=1 pos_value=$1,259.98 qquity=$6,143.12 rsi=68.12386825844982 sigma=0.2389 holding_days=181
+entry_rsi_20 | 2004-01-05 ENTRY: S=31.4627 K=24.0 exp=2005-01-21 Tpx=$12.30 px=$8.20 contracts=1 cost=$820.52 rsi=68.12386825844982 sigma=0.2389
+entry_rsi_30 | 2004-03-22 Exit: S=29.1025 K=20.0 exp=2004-10-15 hit_profit=False Tpx=$13.26 px=$9.29  contracts=1 pos_value=$929.37 qquity=$8,625.98 rsi=33.29047504095796 sigma=0.27149999999999996 holding_days=180
+entry_rsi_30 | 2004-03-22 ENTRY: S=29.1025 K=21.0 exp=2005-04-15 Tpx=$13.11 px=$8.74 contracts=1 cost=$874.62 rsi=33.29047504095796 sigma=0.27149999999999996
+entry_rsi_20 | 2004-07-06 Exit: S=30.557 K=24.0 exp=2005-01-21 hit_profit=False Tpx=$12.30 px=$6.95  contracts=1 pos_value=$695.09 qquity=$6,017.04 rsi=43.83391530714022 sigma=0.2211 holding_days=183
+entry_rsi_20 | 2004-07-06 ENTRY: S=30.557 K=24.0 exp=2005-07-15 Tpx=$11.15 px=$7.43 contracts=1 cost=$743.70 rsi=43.83391530714022 sigma=0.2211
+entry_rsi_30 | 2004-09-20 Exit: S=30.0471 K=21.0 exp=2005-04-15 hit_profit=False Tpx=$13.11 px=$9.31  contracts=1 pos_value=$930.65 qquity=$8,681.36 rsi=60.41708680355264 sigma=0.20559999999999998 holding_days=182
+entry_rsi_30 | 2004-09-27 ENTRY: S=29.2601 K=23.0 exp=2005-10-21 Tpx=$10.71 px=$7.14 contracts=1 cost=$714.60 rsi=46.1125149234216 sigma=0.2192
+entry_rsi_30 | 2004-11-17 Exit: S=33.1746 K=23.0 exp=2005-10-21 hit_profit=True Tpx=$10.71 px=$10.73  contracts=1 pos_value=$1,072.55 qquity=$9,038.66 rsi=74.51502537377506 sigma=0.185 holding_days=51
+entry_rsi_20 | 2005-01-03 Exit: S=33.8267 K=24.0 exp=2005-07-15 hit_profit=False Tpx=$11.15 px=$10.19  contracts=1 pos_value=$1,018.56 qquity=$6,291.25 rsi=52.28794263495549 sigma=0.195 holding_days=181
+entry_rsi_20 | 2005-01-03 ENTRY: S=33.8267 K=28.0 exp=2006-01-20 Tpx=$10.58 px=$7.05 contracts=1 cost=$705.77 rsi=52.28794263495549 sigma=0.195
+entry_rsi_30 | 2005-01-04 ENTRY: S=33.208 K=27.0 exp=2006-01-20 Tpx=$11.04 px=$7.36 contracts=1 cost=$736.94 rsi=41.78629495381675 sigma=0.2006
+entry_rsi_30 | 2005-07-05 Exit: S=31.8064 K=27.0 exp=2006-01-20 hit_profit=False Tpx=$11.04 px=$5.38  contracts=1 pos_value=$537.92 qquity=$8,839.00 rsi=46.79876231468694 sigma=0.145 holding_days=182
+entry_rsi_30 | 2005-07-05 ENTRY: S=31.8064 K=28.0 exp=2006-07-21 Tpx=$7.67 px=$5.12 contracts=1 cost=$512.26 rsi=46.79876231468694 sigma=0.145
+entry_rsi_20 | 2005-07-05 Exit: S=31.8064 K=28.0 exp=2006-01-20 hit_profit=False Tpx=$10.58 px=$4.47  contracts=1 pos_value=$446.66 qquity=$6,031.48 rsi=46.79876231468694 sigma=0.145 holding_days=183
+entry_rsi_20 | 2005-07-05 ENTRY: S=31.8064 K=28.0 exp=2006-07-21 Tpx=$7.67 px=$5.12 contracts=1 cost=$512.26 rsi=46.79876231468694 sigma=0.145
+entry_rsi_30 | 2005-11-11 Exit: S=34.887 K=28.0 exp=2006-07-21 hit_profit=True Tpx=$7.67 px=$7.74  contracts=1 pos_value=$773.60 qquity=$9,099.69 rsi=69.67272557087986 sigma=0.1421 holding_days=129
+entry_rsi_20 | 2005-11-11 Exit: S=34.887 K=28.0 exp=2006-07-21 hit_profit=True Tpx=$7.67 px=$7.74  contracts=1 pos_value=$773.60 qquity=$6,292.17 rsi=69.67272557087986 sigma=0.1421 holding_days=129
+entry_rsi_20 | 2005-11-11 ENTRY: S=34.887 K=31.0 exp=2006-11-17 Tpx=$8.28 px=$5.52 contracts=1 cost=$552.73 rsi=69.67272557087986 sigma=0.1421
+entry_rsi_30 | 2005-12-19 ENTRY: S=35.1562 K=31.0 exp=2007-01-19 Tpx=$8.82 px=$5.88 contracts=1 cost=$588.62 rsi=45.67527505739469 sigma=0.1423
+entry_rsi_20 | 2006-05-10 Exit: S=35.8237 K=31.0 exp=2006-11-17 hit_profit=False Tpx=$8.28 px=$5.71  contracts=1 pos_value=$571.13 qquity=$6,309.92 rsi=46.549083042899795 sigma=0.1485 holding_days=180
+entry_rsi_20 | 2006-05-10 ENTRY: S=35.8237 K=31.0 exp=2007-05-18 Tpx=$9.89 px=$6.59 contracts=1 cost=$659.96 rsi=46.549083042899795 sigma=0.1485
+entry_rsi_30 | 2006-06-19 Exit: S=32.7194 K=31.0 exp=2007-01-19 hit_profit=False Tpx=$8.82 px=$3.70  contracts=1 pos_value=$369.80 qquity=$8,880.22 rsi=40.50684640944474 sigma=0.22039999999999998 holding_days=182
+entry_rsi_30 | 2006-06-19 ENTRY: S=32.7194 K=26.0 exp=2007-07-20 Tpx=$12.72 px=$8.48 contracts=1 cost=$848.89 rsi=40.50684640944474 sigma=0.22039999999999998
+entry_rsi_20 | 2006-11-06 Exit: S=36.6196 K=31.0 exp=2007-05-18 hit_profit=False Tpx=$9.89 px=$6.55  contracts=1 pos_value=$655.31 qquity=$6,304.63 rsi=60.1564140744648 sigma=0.1739 holding_days=180
+entry_rsi_20 | 2006-11-06 ENTRY: S=36.6196 K=31.0 exp=2007-11-16 Tpx=$11.23 px=$7.49 contracts=1 cost=$749.46 rsi=60.1564140744648 sigma=0.1739
+entry_rsi_30 | 2006-11-15 Exit: S=37.9686 K=26.0 exp=2007-07-20 hit_profit=True Tpx=$12.72 px=$12.84  contracts=1 pos_value=$1,284.10 qquity=$9,314.78 rsi=72.24819228092929 sigma=0.154 holding_days=149
+entry_rsi_30 | 2006-12-20 ENTRY: S=37.6583 K=33.0 exp=2007-12-21 Tpx=$9.92 px=$6.62 contracts=1 cost=$662.31 rsi=49.40361012981803 sigma=0.1607
+entry_rsi_20 | 2007-05-07 Exit: S=40.2142 K=31.0 exp=2007-11-16 hit_profit=False Tpx=$11.23 px=$10.03  contracts=1 pos_value=$1,002.52 qquity=$6,557.04 rsi=69.78942696305106 sigma=0.1698 holding_days=182
+entry_rsi_20 | 2007-05-07 ENTRY: S=40.2142 K=34.0 exp=2008-05-16 Tpx=$12.29 px=$8.19 contracts=1 cost=$819.75 rsi=69.78942696305106 sigma=0.1698
+entry_rsi_30 | 2007-06-18 Exit: S=41.2313 K=33.0 exp=2007-12-21 hit_profit=False Tpx=$9.92 px=$9.07  contracts=1 pos_value=$907.40 qquity=$9,559.22 rsi=61.849672606693126 sigma=0.1586 holding_days=180
+entry_rsi_30 | 2007-06-26 ENTRY: S=40.4072 K=34.0 exp=2008-07-18 Tpx=$12.96 px=$8.64 contracts=1 cost=$864.61 rsi=47.660342617959486 sigma=0.1959
+entry_rsi_20 | 2007-10-05 Exit: S=45.614 K=34.0 exp=2008-05-16 hit_profit=True Tpx=$12.29 px=$12.51  contracts=1 pos_value=$1,251.41 qquity=$6,988.05 rsi=73.24710045160738 sigma=0.1977 holding_days=151
+entry_rsi_30 | 2007-10-08 Exit: S=45.8959 K=34.0 exp=2008-07-18 hit_profit=True Tpx=$12.96 px=$13.06  contracts=1 pos_value=$1,306.35 qquity=$10,000.30 rsi=74.78663704395889 sigma=0.2025 holding_days=104
+entry_rsi_20 | 2007-10-11 ENTRY: S=45.475 K=36.0 exp=2008-10-17 Tpx=$17.20 px=$11.47 contracts=1 cost=$1,147.52 rsi=65.10887368810721 sigma=0.2242
+entry_rsi_30 | 2007-11-08 ENTRY: S=44.6693 K=33.0 exp=2008-11-21 Tpx=$20.42 px=$13.62 contracts=1 cost=$1,362.27 rsi=42.22071022564181 sigma=0.2961
+entry_rsi_20 | 2008-04-08 Exit: S=39.2821 K=36.0 exp=2008-10-17 hit_profit=False Tpx=$17.20 px=$4.97  contracts=1 pos_value=$497.43 qquity=$6,337.31 rsi=57.88302126937417 sigma=0.26030000000000003 holding_days=180
+entry_rsi_20 | 2008-04-08 ENTRY: S=39.2821 K=30.0 exp=2009-04-17 Tpx=$15.63 px=$10.42 contracts=1 cost=$1,042.66 rsi=57.88302126937417 sigma=0.26030000000000003
+entry_rsi_30 | 2008-05-06 Exit: S=42.3286 K=33.0 exp=2008-11-21 hit_profit=False Tpx=$20.42 px=$9.82  contracts=1 pos_value=$981.63 qquity=$9,619.01 rsi=68.8344885182497 sigma=0.2188 holding_days=180
+entry_rsi_30 | 2008-06-10 ENTRY: S=41.9901 K=32.0 exp=2009-06-19 Tpx=$17.20 px=$11.47 contracts=1 cost=$1,147.15 rsi=48.45206078658345 sigma=0.2658
+entry_rsi_20 | 2008-10-06 Exit: S=30.1969 K=30.0 exp=2009-04-17 hit_profit=False Tpx=$15.63 px=$4.98  contracts=1 pos_value=$498.39 qquity=$5,792.39 rsi=25.687541559632734 sigma=0.5536 holding_days=181
+entry_rsi_20 | 2008-10-06 ENTRY: S=30.1969 K=17.0 exp=2009-10-16 Tpx=$21.52 px=$14.35 contracts=1 cost=$1,435.56 rsi=25.687541559632734 sigma=0.5536
+entry_rsi_30 | 2008-12-08 Exit: S=26.0561 K=32.0 exp=2009-06-19 hit_profit=False Tpx=$17.20 px=$2.39  contracts=1 pos_value=$239.12 qquity=$8,710.33 rsi=51.93770421149645 sigma=0.5717 holding_days=181
+entry_rsi_30 | 2008-12-11 ENTRY: S=25.1975 K=15.0 exp=2009-12-18 Tpx=$16.67 px=$11.11 contracts=1 cost=$1,111.75 rsi=47.8987460135184 sigma=0.5206000000000001
+entry_rsi_20 | 2009-04-06 Exit: S=28.0364 K=17.0 exp=2009-10-16 hit_profit=False Tpx=$21.52 px=$11.22  contracts=1 pos_value=$1,122.00 qquity=$5,478.18 rsi=65.30952896195518 sigma=0.4156 holding_days=182
+entry_rsi_20 | 2009-04-06 ENTRY: S=28.0364 K=18.0 exp=2010-04-16 Tpx=$16.24 px=$10.83 contracts=1 cost=$1,083.50 rsi=65.30952896195518 sigma=0.4156
+entry_rsi_30 | 2009-06-02 Exit: S=31.6634 K=15.0 exp=2009-12-18 hit_profit=True Tpx=$16.67 px=$16.70  contracts=1 pos_value=$1,670.16 qquity=$9,268.08 rsi=69.6510067960547 sigma=0.3061 holding_days=173
+entry_rsi_30 | 2009-06-22 ENTRY: S=30.521 K=21.0 exp=2010-07-16 Tpx=$15.18 px=$10.12 contracts=1 cost=$1,012.37 rsi=46.3623398961971 sigma=0.3141
+entry_rsi_20 | 2009-07-23 Exit: S=34.2368 K=18.0 exp=2010-04-16 hit_profit=True Tpx=$16.24 px=$16.30  contracts=1 pos_value=$1,630.39 qquity=$6,024.42 rsi=76.76189710253624 sigma=0.2587 holding_days=108
+entry_rsi_20 | 2009-08-06 ENTRY: S=34.2624 K=25.0 exp=2010-08-20 Tpx=$14.75 px=$9.83 contracts=1 cost=$983.78 rsi=65.94500855929137 sigma=0.2636
+entry_rsi_30 | 2009-09-11 Exit: S=36.1215 K=21.0 exp=2010-07-16 hit_profit=True Tpx=$15.18 px=$15.21  contracts=1 pos_value=$1,521.06 qquity=$9,776.13 rsi=68.22774333775834 sigma=0.2529 holding_days=81
+entry_rsi_30 | 2009-10-01 ENTRY: S=35.7104 K=26.0 exp=2010-10-15 Tpx=$15.65 px=$10.44 contracts=1 cost=$1,044.16 rsi=46.532210605740175 sigma=0.2895
+entry_rsi_20 | 2009-12-23 Exit: S=39.7455 K=25.0 exp=2010-08-20 hit_profit=True Tpx=$14.75 px=$14.82  contracts=1 pos_value=$1,481.53 qquity=$6,521.53 rsi=66.62415321561625 sigma=0.1967 holding_days=139
+entry_rsi_20 | 2009-12-23 ENTRY: S=39.7455 K=31.0 exp=2011-01-21 Tpx=$13.88 px=$9.25 contracts=1 cost=$925.91 rsi=66.62415321561625 sigma=0.1967
+entry_rsi_30 | 2010-03-18 Exit: S=41.7324 K=26.0 exp=2010-10-15 hit_profit=True Tpx=$15.65 px=$15.79  contracts=1 pos_value=$1,579.41 qquity=$10,310.73 rsi=76.02366766573532 sigma=0.1724 holding_days=168
+entry_rsi_30 | 2010-05-04 ENTRY: S=42.3032 K=31.0 exp=2011-05-20 Tpx=$18.00 px=$12.00 contracts=1 cost=$1,200.45 rsi=44.6876464232628 sigma=0.2609
+entry_rsi_20 | 2010-06-21 Exit: S=40.7047 K=31.0 exp=2011-01-21 hit_profit=False Tpx=$13.88 px=$10.01  contracts=1 pos_value=$1,001.15 qquity=$6,596.11 rsi=52.88987787675472 sigma=0.2557 holding_days=180
+entry_rsi_20 | 2010-06-21 ENTRY: S=40.7047 K=30.0 exp=2011-07-15 Tpx=$17.02 px=$11.35 contracts=1 cost=$1,135.25 rsi=52.88987787675472 sigma=0.2557
+entry_rsi_30 | 2010-11-01 Exit: S=45.8058 K=31.0 exp=2011-05-20 hit_profit=False Tpx=$18.00 px=$14.87  contracts=1 pos_value=$1,486.59 qquity=$10,596.22 rsi=73.48030419277555 sigma=0.22920000000000001 holding_days=181
+entry_rsi_20 | 2010-11-04 Exit: S=47.0832 K=30.0 exp=2011-07-15 hit_profit=True Tpx=$17.02 px=$17.13  contracts=1 pos_value=$1,713.18 qquity=$7,173.39 rsi=81.5453470282634 sigma=0.1954 holding_days=136
+entry_rsi_20 | 2010-11-12 ENTRY: S=46.0612 K=35.0 exp=2011-11-18 Tpx=$17.47 px=$11.65 contracts=1 cost=$1,165.22 rsi=57.405901885038645 sigma=0.2255
+entry_rsi_30 | 2010-11-16 ENTRY: S=45.1254 K=34.0 exp=2011-11-18 Tpx=$17.60 px=$11.74 contracts=1 cost=$1,174.26 rsi=45.27992719095934 sigma=0.2373
+entry_rsi_30 | 2011-02-16 Exit: S=51.7529 K=34.0 exp=2011-11-18 hit_profit=True Tpx=$17.60 px=$17.83  contracts=1 pos_value=$1,783.49 qquity=$11,204.79 rsi=71.90623644311914 sigma=0.18230000000000002 holding_days=92
+entry_rsi_30 | 2011-02-22 ENTRY: S=50.1269 K=38.0 exp=2012-03-16 Tpx=$19.31 px=$12.88 contracts=1 cost=$1,288.18 rsi=47.132435053110655 sigma=0.2339
+entry_rsi_20 | 2011-05-11 Exit: S=51.784 K=35.0 exp=2011-11-18 hit_profit=False Tpx=$17.47 px=$16.82  contracts=1 pos_value=$1,681.83 qquity=$7,689.35 rsi=58.65841036903925 sigma=0.1741 holding_days=180
+entry_rsi_20 | 2011-05-11 ENTRY: S=51.784 K=42.0 exp=2012-05-18 Tpx=$15.48 px=$10.32 contracts=1 cost=$1,032.63 rsi=58.65841036903925 sigma=0.1741
+entry_rsi_30 | 2011-08-22 Exit: S=44.3492 K=38.0 exp=2012-03-16 hit_profit=False Tpx=$19.31 px=$8.96  contracts=1 pos_value=$896.28 qquity=$10,812.24 rsi=34.491455351820036 sigma=0.4203 holding_days=181
+entry_rsi_30 | 2011-08-22 ENTRY: S=44.3492 K=28.0 exp=2012-09-21 Tpx=$26.28 px=$17.52 contracts=1 cost=$1,752.60 rsi=34.491455351820036 sigma=0.4203
+entry_rsi_20 | 2011-11-07 Exit: S=51.5113 K=42.0 exp=2012-05-18 hit_profit=False Tpx=$15.48 px=$10.38  contracts=1 pos_value=$1,037.84 qquity=$7,693.91 rsi=56.560687944100074 sigma=0.2883 holding_days=180
+entry_rsi_20 | 2011-11-07 ENTRY: S=51.5113 K=37.0 exp=2012-11-16 Tpx=$23.03 px=$15.36 contracts=1 cost=$1,536.16 rsi=56.560687944100074 sigma=0.2883
+entry_rsi_30 | 2012-02-02 Exit: S=54.3269 K=28.0 exp=2012-09-21 hit_profit=True Tpx=$26.28 px=$26.35  contracts=1 pos_value=$2,635.18 qquity=$11,694.17 rsi=75.13930228263285 sigma=0.1889 holding_days=164
+entry_rsi_20 | 2012-03-26 Exit: S=60.5558 K=37.0 exp=2012-11-16 hit_profit=True Tpx=$23.03 px=$23.60  contracts=1 pos_value=$2,360.11 qquity=$8,517.21 rsi=80.5610999079186 sigma=0.1592 holding_days=140
+entry_rsi_20 | 2012-04-04 ENTRY: S=59.8312 K=48.0 exp=2013-04-19 Tpx=$18.69 px=$12.46 contracts=1 cost=$1,246.58 rsi=60.77920601095199 sigma=0.1795
+entry_rsi_30 | 2012-04-10 ENTRY: S=58.7932 K=46.0 exp=2013-04-19 Tpx=$20.42 px=$13.61 contracts=1 cost=$1,361.78 rsi=47.50992254630032 sigma=0.2159
+entry_rsi_20 | 2012-10-01 Exit: S=61.1852 K=48.0 exp=2013-04-19 hit_profit=False Tpx=$18.69 px=$13.32  contracts=1 pos_value=$1,331.83 qquity=$8,601.81 rsi=48.7420495845876 sigma=0.1775 holding_days=180
+entry_rsi_20 | 2012-10-01 ENTRY: S=61.1852 K=49.0 exp=2013-10-18 Tpx=$19.19 px=$12.79 contracts=1 cost=$1,279.82 rsi=48.7420495845876 sigma=0.1775
+entry_rsi_30 | 2012-10-08 Exit: S=61.0783 K=46.0 exp=2013-04-19 hit_profit=False Tpx=$20.42 px=$15.15  contracts=1 pos_value=$1,515.20 qquity=$11,846.95 rsi=46.77072692327853 sigma=0.1752 holding_days=181
+entry_rsi_30 | 2012-10-08 ENTRY: S=61.0783 K=50.0 exp=2013-10-18 Tpx=$17.69 px=$11.79 contracts=1 cost=$1,180.01 rsi=46.77072692327853 sigma=0.1752
+entry_rsi_20 | 2013-04-01 Exit: S=61.6989 K=49.0 exp=2013-10-18 hit_profit=False Tpx=$19.19 px=$12.77  contracts=1 pos_value=$1,276.89 qquity=$8,598.23 rsi=53.62768696222977 sigma=0.1448 holding_days=182
+entry_rsi_20 | 2013-04-01 ENTRY: S=61.6989 K=52.0 exp=2014-04-17 Tpx=$15.42 px=$10.28 contracts=1 cost=$1,028.40 rsi=53.62768696222977 sigma=0.1448
+entry_rsi_30 | 2013-04-08 Exit: S=61.447 K=50.0 exp=2013-10-18 hit_profit=False Tpx=$17.69 px=$11.55  contracts=1 pos_value=$1,154.58 qquity=$11,820.88 rsi=49.87944887580284 sigma=0.1489 holding_days=182
+entry_rsi_30 | 2013-04-08 ENTRY: S=61.447 K=51.0 exp=2014-04-17 Tpx=$16.42 px=$10.94 contracts=1 cost=$1,095.14 rsi=49.87944887580284 sigma=0.1489
+entry_rsi_30 | 2013-07-11 Exit: S=67.7413 K=51.0 exp=2014-04-17 hit_profit=True Tpx=$16.42 px=$16.81  contracts=1 pos_value=$1,681.50 qquity=$12,406.58 rsi=69.41069335835117 sigma=0.1387 holding_days=94
+entry_rsi_20 | 2013-07-11 Exit: S=67.7413 K=52.0 exp=2014-04-17 hit_profit=True Tpx=$15.42 px=$15.83  contracts=1 pos_value=$1,582.98 qquity=$9,152.17 rsi=69.41069335835117 sigma=0.1387 holding_days=101
+entry_rsi_20 | 2013-07-11 ENTRY: S=67.7413 K=57.0 exp=2014-07-18 Tpx=$16.89 px=$11.26 contracts=1 cost=$1,126.94 rsi=69.41069335835117 sigma=0.1387
+entry_rsi_30 | 2013-08-15 ENTRY: S=68.2278 K=57.0 exp=2014-08-15 Tpx=$17.71 px=$11.81 contracts=1 cost=$1,181.21 rsi=49.99518765618097 sigma=0.149
+entry_rsi_20 | 2013-10-18 Exit: S=74.4528 K=57.0 exp=2014-07-18 hit_profit=True Tpx=$16.89 px=$17.54  contracts=1 pos_value=$1,753.53 qquity=$9,778.10 rsi=70.06087044258733 sigma=0.1369 holding_days=99
+entry_rsi_30 | 2013-10-21 Exit: S=74.6116 K=57.0 exp=2014-08-15 hit_profit=True Tpx=$17.71 px=$17.72  contracts=1 pos_value=$1,772.12 qquity=$12,996.85 rsi=70.69786814920155 sigma=0.14400000000000002 holding_days=67
+entry_rsi_20 | 2013-10-23 ENTRY: S=74.2664 K=61.0 exp=2014-11-21 Tpx=$20.83 px=$13.89 contracts=1 cost=$1,389.41 rsi=66.51518081979961 sigma=0.1533
+entry_rsi_30 | 2014-01-13 ENTRY: S=78.1975 K=65.0 exp=2015-01-16 Tpx=$20.75 px=$13.84 contracts=1 cost=$1,384.21 rsi=48.57317792757732 sigma=0.1505
+entry_rsi_20 | 2014-02-18 Exit: S=82.052 K=61.0 exp=2014-11-21 hit_profit=True Tpx=$20.83 px=$21.15  contracts=1 pos_value=$2,114.74 qquity=$10,502.79 rsi=66.49772475992947 sigma=0.1523 holding_days=118
+entry_rsi_20 | 2014-02-18 ENTRY: S=82.052 K=68.0 exp=2015-02-20 Tpx=$22.09 px=$14.72 contracts=1 cost=$1,473.07 rsi=66.49772475992947 sigma=0.1523
+entry_rsi_30 | 2014-06-27 Exit: S=86.0126 K=65.0 exp=2015-01-16 hit_profit=True Tpx=$20.75 px=$21.05  contracts=1 pos_value=$2,105.04 qquity=$13,717.02 rsi=74.9820641970255 sigma=0.12029999999999999 holding_days=165
+entry_rsi_30 | 2014-07-31 ENTRY: S=87.183 K=71.0 exp=2015-08-21 Tpx=$25.56 px=$17.04 contracts=1 cost=$1,704.94 rsi=48.65098261339738 sigma=0.16820000000000002
+entry_rsi_20 | 2014-08-18 Exit: S=90.0533 K=68.0 exp=2015-02-20 hit_profit=True Tpx=$22.09 px=$22.09  contracts=1 pos_value=$2,209.01 qquity=$11,238.07 rsi=67.92409877283649 sigma=0.1285 holding_days=181
+entry_rsi_20 | 2014-08-18 ENTRY: S=90.0533 K=77.0 exp=2015-08-21 Tpx=$20.56 px=$13.71 contracts=1 cost=$1,371.30 rsi=67.92409877283649 sigma=0.1285
+entry_rsi_30 | 2014-11-26 Exit: S=97.0546 K=71.0 exp=2015-08-21 hit_profit=True Tpx=$25.56 px=$26.14  contracts=1 pos_value=$2,613.84 qquity=$14,625.27 rsi=76.00771158340461 sigma=0.1364 holding_days=118
+entry_rsi_20 | 2014-11-28 Exit: S=97.4801 K=77.0 exp=2015-08-21 hit_profit=True Tpx=$20.56 px=$20.68  contracts=1 pos_value=$2,067.91 qquity=$11,934.04 rsi=77.48698827907202 sigma=0.1474 holding_days=102
+entry_rsi_20 | 2014-12-01 ENTRY: S=96.3813 K=79.0 exp=2015-12-18 Tpx=$27.52 px=$18.35 contracts=1 cost=$1,835.50 rsi=66.14523768177675 sigma=0.16570000000000001
+entry_rsi_30 | 2014-12-10 ENTRY: S=95.0118 K=75.0 exp=2015-12-18 Tpx=$31.62 px=$21.08 contracts=1 cost=$2,108.35 rsi=49.72807385936883 sigma=0.19469999999999998
+entry_rsi_20 | 2015-06-01 Exit: S=102.178 K=79.0 exp=2015-12-18 hit_profit=False Tpx=$27.52 px=$23.32  contracts=1 pos_value=$2,332.35 qquity=$12,430.24 rsi=56.74924136281937 sigma=0.14980000000000002 holding_days=182
+entry_rsi_20 | 2015-06-01 ENTRY: S=102.178 K=85.0 exp=2016-06-17 Tpx=$27.27 px=$18.18 contracts=1 cost=$1,818.37 rsi=56.74924136281937 sigma=0.14980000000000002
+entry_rsi_30 | 2015-06-08 Exit: S=100.08 K=75.0 exp=2015-12-18 hit_profit=False Tpx=$31.62 px=$25.22  contracts=1 pos_value=$2,522.03 qquity=$15,038.30 rsi=43.19906101049711 sigma=0.16940000000000002 holding_days=180
+entry_rsi_30 | 2015-06-08 ENTRY: S=100.08 K=82.0 exp=2016-06-17 Tpx=$28.83 px=$19.22 contracts=1 cost=$1,922.55 rsi=43.19906101049711 sigma=0.16940000000000002
+entry_rsi_20 | 2015-11-30 Exit: S=105.963 K=85.0 exp=2016-06-17 hit_profit=False Tpx=$27.27 px=$21.45  contracts=1 pos_value=$2,145.19 qquity=$12,756.41 rsi=59.0158633257289 sigma=0.18100000000000002 holding_days=182
+entry_rsi_20 | 2015-11-30 ENTRY: S=105.963 K=85.0 exp=2016-12-16 Tpx=$33.54 px=$22.36 contracts=1 cost=$2,236.42 rsi=59.0158633257289 sigma=0.18100000000000002
+entry_rsi_30 | 2015-12-07 Exit: S=106.539 K=82.0 exp=2016-06-17 hit_profit=False Tpx=$28.83 px=$24.91  contracts=1 pos_value=$2,491.20 qquity=$15,606.29 rsi=56.78152923565225 sigma=0.17600000000000002 holding_days=182
+entry_rsi_30 | 2015-12-09 ENTRY: S=104.943 K=83.0 exp=2016-12-16 Tpx=$35.54 px=$23.69 contracts=1 cost=$2,369.97 rsi=48.89601814561122 sigma=0.2045
+entry_rsi_20 | 2016-05-31 Exit: S=103.206 K=85.0 exp=2016-12-16 hit_profit=False Tpx=$33.54 px=$18.69  contracts=1 pos_value=$1,868.79 qquity=$12,388.13 rsi=64.49279623198842 sigma=0.1525 holding_days=183
+entry_rsi_20 | 2016-05-31 ENTRY: S=103.206 K=86.0 exp=2017-06-16 Tpx=$27.91 px=$18.61 contracts=1 cost=$1,861.30 rsi=64.49279623198842 sigma=0.1525
+entry_rsi_30 | 2016-06-06 Exit: S=103.304 K=83.0 exp=2016-12-16 hit_profit=False Tpx=$35.54 px=$20.65  contracts=1 pos_value=$2,065.34 qquity=$15,301.01 rsi=63.33891835351789 sigma=0.1525 holding_days=180
+entry_rsi_30 | 2016-06-13 ENTRY: S=101.031 K=80.0 exp=2017-06-16 Tpx=$33.92 px=$22.61 contracts=1 cost=$2,261.74 rsi=45.895004551915406 sigma=0.2061
+entry_rsi_20 | 2016-11-28 Exit: S=111.402 K=86.0 exp=2017-06-16 hit_profit=False Tpx=$27.91 px=$25.81  contracts=1 pos_value=$2,580.79 qquity=$13,106.96 rsi=56.13104623339377 sigma=0.1512 holding_days=181
+entry_rsi_20 | 2016-11-28 ENTRY: S=111.402 K=93.0 exp=2017-12-15 Tpx=$30.01 px=$20.01 contracts=1 cost=$2,001.56 rsi=56.13104623339377 sigma=0.1512
+entry_rsi_30 | 2016-12-12 Exit: S=111.823 K=80.0 exp=2017-06-16 hit_profit=False Tpx=$33.92 px=$32.17  contracts=1 pos_value=$3,216.95 qquity=$16,255.58 rsi=56.802171305951624 sigma=0.1387 holding_days=182
+entry_rsi_30 | 2016-12-30 ENTRY: S=111.697 K=92.0 exp=2018-01-19 Tpx=$32.27 px=$21.52 contracts=1 cost=$2,152.27 rsi=47.27192755649197 sigma=0.1668
+entry_rsi_20 | 2017-02-17 Exit: S=122.382 K=93.0 exp=2017-12-15 hit_profit=True Tpx=$30.01 px=$30.03  contracts=1 pos_value=$3,002.77 qquity=$14,107.53 rsi=83.91078433972302 sigma=0.1207 holding_days=81
+entry_rsi_30 | 2017-03-01 Exit: S=123.92 K=92.0 exp=2018-01-19 hit_profit=True Tpx=$32.27 px=$32.69  contracts=1 pos_value=$3,269.27 qquity=$17,371.93 rsi=80.21069633023316 sigma=0.129 holding_days=61
+entry_rsi_20 | 2017-03-07 ENTRY: S=123.038 K=107.0 exp=2018-03-16 Tpx=$26.85 px=$17.90 contracts=1 cost=$1,790.66 rsi=67.77323642801147 sigma=0.1213
+entry_rsi_30 | 2017-04-12 ENTRY: S=123.677 K=103.0 exp=2018-04-20 Tpx=$34.04 px=$22.69 contracts=1 cost=$2,270.05 rsi=47.842586747175176 sigma=0.15560000000000002
+entry_rsi_20 | 2017-05-25 Exit: S=133.175 K=107.0 exp=2018-03-16 hit_profit=True Tpx=$26.85 px=$27.28  contracts=1 pos_value=$2,728.21 qquity=$15,044.43 rsi=71.14064474232755 sigma=0.1258 holding_days=79
+entry_rsi_20 | 2017-06-09 ENTRY: S=132.226 K=108.0 exp=2018-06-15 Tpx=$40.22 px=$26.82 contracts=1 cost=$2,682.27 rsi=50.72625774115276 sigma=0.1813
+entry_rsi_30 | 2017-07-19 Exit: S=136.39 K=103.0 exp=2018-04-20 hit_profit=True Tpx=$34.04 px=$34.38  contracts=1 pos_value=$3,437.94 qquity=$18,539.17 rsi=65.6122915965766 sigma=0.13949999999999999 holding_days=98
+entry_rsi_30 | 2017-08-10 ENTRY: S=133.608 K=108.0 exp=2018-08-17 Tpx=$42.46 px=$28.31 contracts=1 cost=$2,831.37 rsi=42.18337577920689 sigma=0.1906
+entry_rsi_20 | 2017-11-21 Exit: S=147.644 K=108.0 exp=2018-06-15 hit_profit=True Tpx=$40.22 px=$40.63  contracts=1 pos_value=$4,062.82 qquity=$16,424.33 rsi=69.44786153571873 sigma=0.1278 holding_days=165
+entry_rsi_20 | 2017-11-21 ENTRY: S=147.644 K=128.0 exp=2018-12-21 Tpx=$34.31 px=$22.87 contracts=1 cost=$2,287.79 rsi=69.44786153571873 sigma=0.1278
+entry_rsi_30 | 2017-12-15 Exit: S=149.586 K=108.0 exp=2018-08-17 hit_profit=True Tpx=$42.46 px=$42.82  contracts=1 pos_value=$4,281.94 qquity=$19,989.09 rsi=66.76197736603402 sigma=0.1188 holding_days=127
+entry_rsi_20 | 2018-01-22 Exit: S=159.948 K=128.0 exp=2018-12-21 hit_profit=True Tpx=$34.31 px=$34.61  contracts=1 pos_value=$3,461.46 qquity=$17,597.34 rsi=82.50884170462562 sigma=0.1629 holding_days=62
+entry_rsi_20 | 2018-01-30 ENTRY: S=160.506 K=128.0 exp=2019-02-15 Tpx=$55.05 px=$36.70 contracts=1 cost=$3,670.84 rsi=68.38764302091113 sigma=0.20350000000000001
+entry_rsi_30 | 2018-02-02 ENTRY: S=156.613 K=125.0 exp=2019-02-15 Tpx=$53.66 px=$35.77 contracts=1 cost=$3,577.85 rsi=49.94483644322044 sigma=0.2066
+entry_rsi_20 | 2018-07-30 Exit: S=167.231 K=128.0 exp=2019-02-15 hit_profit=False Tpx=$55.05 px=$41.20  contracts=1 pos_value=$4,119.65 qquity=$18,045.49 rsi=44.797215582009414 sigma=0.20440000000000003 holding_days=181
+entry_rsi_20 | 2018-07-30 ENTRY: S=167.231 K=134.0 exp=2019-08-16 Tpx=$57.59 px=$38.39 contracts=1 cost=$3,839.82 rsi=44.797215582009414 sigma=0.20440000000000003
+entry_rsi_30 | 2018-08-01 Exit: S=169.172 K=125.0 exp=2019-02-15 hit_profit=False Tpx=$53.66 px=$45.89  contracts=1 pos_value=$4,589.02 qquity=$20,999.61 rsi=50.426115710857815 sigma=0.18489999999999998 holding_days=180
+entry_rsi_30 | 2018-09-06 ENTRY: S=173.641 K=141.0 exp=2019-09-20 Tpx=$56.92 px=$37.95 contracts=1 cost=$3,795.18 rsi=49.39061890894921 sigma=0.1917
+entry_rsi_20 | 2019-01-28 Exit: S=156.507 K=134.0 exp=2019-08-16 hit_profit=False Tpx=$57.59 px=$26.57  contracts=1 pos_value=$2,656.63 qquity=$16,861.66 rsi=54.41946587104557 sigma=0.2343 holding_days=182
+entry_rsi_20 | 2019-01-28 ENTRY: S=156.507 K=122.0 exp=2020-02-21 Tpx=$59.85 px=$39.90 contracts=1 cost=$3,990.83 rsi=54.41946587104557 sigma=0.2343
+entry_rsi_30 | 2019-03-05 Exit: S=167.476 K=141.0 exp=2019-09-20 hit_profit=False Tpx=$56.92 px=$29.08  contracts=1 pos_value=$2,907.91 qquity=$20,111.69 rsi=68.1044785144105 sigma=0.1751 holding_days=180
+entry_rsi_20 | 2019-04-17 Exit: S=179.907 K=122.0 exp=2020-02-21 hit_profit=True Tpx=$59.85 px=$60.43  contracts=1 pos_value=$6,042.55 qquity=$18,912.73 rsi=74.3941492981441 sigma=0.1586 holding_days=79
+entry_rsi_20 | 2019-04-30 ENTRY: S=182.188 K=152.0 exp=2020-05-15 Tpx=$53.17 px=$35.44 contracts=1 cost=$3,545.14 rsi=69.39170888918977 sigma=0.166
+entry_rsi_30 | 2019-05-07 ENTRY: S=179.035 K=140.0 exp=2020-05-15 Tpx=$66.83 px=$44.55 contracts=1 cost=$4,455.91 rsi=49.71458249110807 sigma=0.2286
+entry_rsi_20 | 2019-10-28 Exit: S=190.721 K=152.0 exp=2020-05-15 hit_profit=False Tpx=$53.17 px=$40.28  contracts=1 pos_value=$4,028.42 qquity=$19,395.36 rsi=65.3820810181143 sigma=0.1681 holding_days=181
+entry_rsi_20 | 2019-10-28 ENTRY: S=190.721 K=158.0 exp=2020-11-20 Tpx=$55.69 px=$37.12 contracts=1 cost=$3,713.01 rsi=65.3820810181143 sigma=0.1681
+entry_rsi_30 | 2019-11-04 Exit: S=193.151 K=140.0 exp=2020-05-15 hit_profit=False Tpx=$66.83 px=$54.32  contracts=1 pos_value=$5,431.93 qquity=$21,087.06 rsi=68.11908615040056 sigma=0.1656 holding_days=181
+entry_rsi_20 | 2020-01-09 Exit: S=211.854 K=158.0 exp=2020-11-20 hit_profit=True Tpx=$55.69 px=$56.14  contracts=1 pos_value=$5,614.49 qquity=$21,296.19 rsi=77.18967667185282 sigma=0.1604 holding_days=73
+entry_rsi_20 | 2020-01-27 ENTRY: S=210.991 K=165.0 exp=2021-02-19 Tpx=$76.54 px=$51.03 contracts=1 cost=$5,103.60 rsi=53.55930801646502 sigma=0.2146
+entry_rsi_30 | 2020-02-24 ENTRY: S=214.168 K=154.0 exp=2021-03-19 Tpx=$98.68 px=$65.79 contracts=1 cost=$6,579.17 rsi=40.927499162683084 sigma=0.2923
+entry_rsi_20 | 2020-06-23 Exit: S=241.695 K=165.0 exp=2021-02-19 hit_profit=True Tpx=$76.54 px=$78.34  contracts=1 pos_value=$7,833.68 qquity=$24,025.62 rsi=69.30473036803491 sigma=0.3123 holding_days=148
+entry_rsi_20 | 2020-06-23 ENTRY: S=241.695 K=169.0 exp=2021-07-16 Tpx=$115.94 px=$77.29 contracts=1 cost=$7,730.04 rsi=69.30473036803491 sigma=0.3123
+entry_rsi_30 | 2020-07-08 Exit: S=252.519 K=154.0 exp=2021-03-19 hit_profit=True Tpx=$98.68 px=$99.22  contracts=1 pos_value=$9,922.13 qquity=$24,429.37 rsi=70.00911089625382 sigma=0.3105 holding_days=135
+entry_rsi_20 | 2020-08-28 Exit: S=284.124 K=169.0 exp=2021-07-16 hit_profit=True Tpx=$115.94 px=$116.56  contracts=1 pos_value=$11,655.67 qquity=$27,950.59 rsi=75.24824631022963 sigma=0.32799999999999996 holding_days=66
+entry_rsi_20 | 2020-09-03 ENTRY: S=279.153 K=177.0 exp=2021-09-17 Tpx=$163.91 px=$109.27 contracts=1 cost=$10,927.70 rsi=57.32911059487249 sigma=0.42090000000000005
+entry_rsi_30 | 2020-09-08 ENTRY: S=262.193 K=168.0 exp=2021-09-17 Tpx=$150.95 px=$100.63 contracts=1 cost=$10,063.86 rsi=41.48420217183621 sigma=0.4102
+entry_rsi_30 | 2021-01-25 Exit: S=319.717 K=168.0 exp=2021-09-17 hit_profit=True Tpx=$150.95 px=$151.87  contracts=1 pos_value=$15,186.64 qquity=$29,551.50 rsi=69.17202034535518 sigma=0.2873 holding_days=139
+entry_rsi_30 | 2021-01-29 ENTRY: S=306.523 K=202.0 exp=2022-02-18 Tpx=$167.08 px=$111.38 contracts=1 cost=$11,139.08 rsi=48.61469114180359 sigma=0.37439999999999996
+entry_rsi_20 | 2021-03-02 Exit: S=310.259 K=177.0 exp=2021-09-17 hit_profit=False Tpx=$163.91 px=$133.43  contracts=1 pos_value=$13,343.18 qquity=$30,365.42 rsi=44.688745718472106 sigma=0.3011 holding_days=180
+entry_rsi_20 | 2021-03-02 ENTRY: S=310.259 K=219.0 exp=2022-03-18 Tpx=$144.80 px=$96.53 contracts=1 cost=$9,653.81 rsi=44.688745718472106 sigma=0.3011
+entry_rsi_30 | 2021-07-28 Exit: S=357.333 K=202.0 exp=2022-02-18 hit_profit=False Tpx=$167.08 px=$155.41  contracts=1 pos_value=$15,541.38 qquity=$33,953.15 rsi=64.20141700949131 sigma=0.2096 holding_days=180
+entry_rsi_30 | 2021-08-18 ENTRY: S=353.804 K=267.0 exp=2022-08-19 Tpx=$137.33 px=$91.55 contracts=1 cost=$9,155.95 rsi=46.785778890143035 sigma=0.24350000000000002
+entry_rsi_20 | 2021-08-23 Exit: S=364.569 K=219.0 exp=2022-03-18 hit_profit=True Tpx=$144.80 px=$145.66  contracts=1 pos_value=$14,565.93 qquity=$35,276.89 rsi=64.91008397238089 sigma=0.198 holding_days=174
+entry_rsi_20 | 2021-08-23 ENTRY: S=364.569 K=287.0 exp=2022-09-16 Tpx=$122.52 px=$81.68 contracts=1 cost=$8,168.58 rsi=64.91008397238089 sigma=0.198
+entry_rsi_30 | 2022-02-14 Exit: S=340.227 K=267.0 exp=2022-08-19 hit_profit=False Tpx=$137.33 px=$80.59  contracts=1 pos_value=$8,059.15 qquity=$32,855.70 rsi=39.263953832771094 sigma=0.3407 holding_days=180
+entry_rsi_30 | 2022-02-14 ENTRY: S=340.227 K=235.0 exp=2023-02-17 Tpx=$171.35 px=$114.24 contracts=1 cost=$11,424.16 rsi=39.263953832771094 sigma=0.3407
+entry_rsi_20 | 2022-02-22 Exit: S=331.022 K=287.0 exp=2022-09-16 hit_profit=False Tpx=$122.52 px=$58.76  contracts=1 pos_value=$5,875.67 qquity=$32,983.33 rsi=36.07706128840131 sigma=0.33130000000000004 holding_days=183
+entry_rsi_20 | 2022-02-22 ENTRY: S=331.022 K=229.0 exp=2023-03-17 Tpx=$166.53 px=$111.02 contracts=1 cost=$11,102.36 rsi=36.07706128840131 sigma=0.33130000000000004
+entry_rsi_30 | 2022-08-15 Exit: S=327.128 K=235.0 exp=2023-02-17 hit_profit=False Tpx=$171.35 px=$96.49  contracts=1 pos_value=$9,649.28 qquity=$31,080.17 rsi=69.22220849180577 sigma=0.254 holding_days=182
+entry_rsi_30 | 2022-08-22 ENTRY: S=308.763 K=226.0 exp=2023-09-15 Tpx=$143.50 px=$95.66 contracts=1 cost=$9,567.12 rsi=48.52691226371715 sigma=0.2965
+entry_rsi_20 | 2022-08-22 Exit: S=308.763 K=229.0 exp=2023-03-17 hit_profit=False Tpx=$166.53 px=$86.08  contracts=1 pos_value=$8,607.63 qquity=$30,487.95 rsi=48.52691226371715 sigma=0.2965 holding_days=181
+entry_rsi_20 | 2022-08-22 ENTRY: S=308.763 K=226.0 exp=2023-09-15 Tpx=$143.50 px=$95.66 contracts=1 cost=$9,567.12 rsi=48.52691226371715 sigma=0.2965
+entry_rsi_30 | 2023-02-21 Exit: S=290.008 K=226.0 exp=2023-09-15 hit_profit=False Tpx=$143.50 px=$72.86  contracts=1 pos_value=$7,286.49 qquity=$28,798.90 rsi=48.40279150127158 sigma=0.2857 holding_days=183
+entry_rsi_30 | 2023-02-21 ENTRY: S=290.008 K=219.0 exp=2024-03-15 Tpx=$130.62 px=$87.08 contracts=1 cost=$8,708.44 rsi=48.40279150127158 sigma=0.2857
+entry_rsi_20 | 2023-02-21 Exit: S=290.008 K=226.0 exp=2023-09-15 hit_profit=False Tpx=$143.50 px=$72.86  contracts=1 pos_value=$7,286.49 qquity=$28,206.67 rsi=48.40279150127158 sigma=0.2857 holding_days=183
+entry_rsi_20 | 2023-02-21 ENTRY: S=290.008 K=219.0 exp=2024-03-15 Tpx=$130.62 px=$87.08 contracts=1 cost=$8,708.44 rsi=48.40279150127158 sigma=0.2857
+entry_rsi_30 | 2023-05-26 Exit: S=344.167 K=219.0 exp=2024-03-15 hit_profit=True Tpx=$130.62 px=$134.35  contracts=1 pos_value=$13,434.87 qquity=$33,524.68 rsi=74.35106823801364 sigma=0.22210000000000002 holding_days=94
+entry_rsi_20 | 2023-05-26 Exit: S=344.167 K=219.0 exp=2024-03-15 hit_profit=True Tpx=$130.62 px=$134.35  contracts=1 pos_value=$13,434.87 qquity=$32,932.45 rsi=74.35106823801364 sigma=0.22210000000000002 holding_days=94
+entry_rsi_20 | 2023-06-07 ENTRY: S=344.58 K=288.0 exp=2024-06-21 Tpx=$112.62 px=$75.08 contracts=1 cost=$7,508.66 rsi=64.83361283850442 sigma=0.19210000000000002
+entry_rsi_30 | 2023-08-04 ENTRY: S=368.023 K=299.0 exp=2024-08-16 Tpx=$134.02 px=$89.35 contracts=1 cost=$8,935.35 rsi=47.996905838668106 sigma=0.2202
+entry_rsi_20 | 2023-12-04 Exit: S=382.702 K=288.0 exp=2024-06-21 hit_profit=False Tpx=$112.62 px=$102.74  contracts=1 pos_value=$10,273.58 qquity=$35,696.72 rsi=60.23636411010473 sigma=0.1721 holding_days=180
+entry_rsi_20 | 2023-12-04 ENTRY: S=382.702 K=327.0 exp=2024-12-20 Tpx=$114.17 px=$76.12 contracts=1 cost=$7,612.19 rsi=60.23636411010473 sigma=0.1721
+entry_rsi_30 | 2024-01-31 Exit: S=413.891 K=299.0 exp=2024-08-16 hit_profit=False Tpx=$134.02 px=$122.53  contracts=1 pos_value=$12,253.14 qquity=$36,841.82 rsi=54.99448664750549 sigma=0.1825 holding_days=180
+entry_rsi_20 | 2024-02-07 Exit: S=428.8 K=327.0 exp=2024-12-20 hit_profit=True Tpx=$114.17 px=$115.75  contracts=1 pos_value=$11,574.71 qquity=$39,658.60 rsi=67.23217558109074 sigma=0.16940000000000002 holding_days=65
+entry_rsi_20 | 2024-02-07 ENTRY: S=428.8 K=367.0 exp=2025-02-21 Tpx=$125.41 px=$83.61 contracts=1 cost=$8,361.38 rsi=67.23217558109074 sigma=0.16940000000000002
+entry_rsi_30 | 2024-03-15 ENTRY: S=430.716 K=360.0 exp=2025-03-21 Tpx=$139.49 px=$92.99 contracts=1 cost=$9,299.92 rsi=48.91804301026541 sigma=0.1925
+entry_rsi_20 | 2024-06-17 Exit: S=482.115 K=367.0 exp=2025-02-21 hit_profit=True Tpx=$125.41 px=$127.96  contracts=1 pos_value=$12,795.79 qquity=$44,092.36 rsi=81.52485935955467 sigma=0.16829999999999998 holding_days=131
+entry_rsi_20 | 2024-06-24 ENTRY: S=471.83 K=403.0 exp=2025-07-18 Tpx=$141.68 px=$94.45 contracts=1 cost=$9,445.78 rsi=62.509991023596235 sigma=0.1724
+entry_rsi_30 | 2024-07-03 Exit: S=488.833 K=360.0 exp=2025-03-21 hit_profit=True Tpx=$139.49 px=$141.70  contracts=1 pos_value=$14,169.54 qquity=$41,710.79 rsi=73.67567650402144 sigma=0.1628 holding_days=110
+entry_rsi_30 | 2024-07-17 ENTRY: S=479.605 K=395.0 exp=2025-07-18 Tpx=$162.56 px=$108.38 contracts=1 cost=$10,838.27 rsi=48.933600069675364 sigma=0.2046
+entry_rsi_20 | 2024-12-16 Exit: S=536.504 K=403.0 exp=2025-07-18 hit_profit=True Tpx=$141.68 px=$143.71  contracts=1 pos_value=$14,371.27 qquity=$49,017.20 rsi=71.17341789274496 sigma=0.1844 holding_days=175
+entry_rsi_20 | 2024-12-17 ENTRY: S=534.142 K=443.0 exp=2025-12-19 Tpx=$172.64 px=$115.09 contracts=1 cost=$11,509.87 rsi=68.180614225871 sigma=0.19440000000000002
+entry_rsi_30 | 2025-01-13 Exit: S=504.807 K=395.0 exp=2025-07-18 hit_profit=False Tpx=$162.56 px=$119.46  contracts=1 pos_value=$11,945.91 qquity=$42,817.78 rsi=41.873773791971935 sigma=0.218 holding_days=180
+entry_rsi_30 | 2025-01-13 ENTRY: S=504.807 K=409.0 exp=2026-01-05 Tpx=$177.21 px=$118.14 contracts=1 cost=$11,814.60 rsi=41.873773791971935 sigma=0.218
+entry_rsi_20 | 2025-06-16 Exit: S=534.29 K=443.0 exp=2025-12-19 hit_profit=False Tpx=$172.64 px=$103.20  contracts=1 pos_value=$10,320.11 qquity=$47,826.79 rsi=65.03615443233305 sigma=0.2109 holding_days=181
+entry_rsi_20 | 2025-06-16 ENTRY: S=534.29 K=435.0 exp=2026-06-08 Tpx=$183.23 px=$122.15 contracts=1 cost=$12,215.84 rsi=65.03615443233305 sigma=0.2109
+entry_rsi_30 | 2025-07-14 Exit: S=556.21 K=409.0 exp=2026-01-05 hit_profit=False Tpx=$177.21 px=$155.32  contracts=1 pos_value=$15,531.54 qquity=$46,534.07 rsi=67.81578848010236 sigma=0.1978 holding_days=182
+entry_rsi_20 | 2025-10-06 Exit: S=607.71 K=435.0 exp=2026-06-08 hit_profit=True Tpx=$183.23 px=$183.75  contracts=1 pos_value=$18,374.63 qquity=$53,984.93 rsi=70.61386583245357 sigma=0.204 holding_days=112
