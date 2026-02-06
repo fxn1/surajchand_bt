@@ -246,6 +246,7 @@ def backtest(
 
         for row in entryExit_df.itertuples():
             entryExit = row.entryExit
+            exit_true = False
             # Mark-to-market
             open_trade, posn = entryExit.portfolio.first_open_trade()
             if open_trade and open_trade.contracts > 0:
@@ -283,7 +284,7 @@ def backtest(
             entryExit.portfolio.equity_curve.append({"Date": d, "Equity": equity})
 
             # Entries
-            if not open_trade:
+            if exit_true or not open_trade:
                 if not entryExit.check_entry_conditions(d, end_ts, rsi, sigma):
                     continue
 
