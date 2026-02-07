@@ -5,8 +5,8 @@
 #       trade_portfolios (list)
 #         TradePortfolio
 #           cash
-#           positions (list)
-#             OptionPosition
+#           optionLeg (list)
+#             OptionLeg
 #               option_type
 #               strike
 #               expiry
@@ -71,7 +71,7 @@ class OptionTrade:
 
 
 @dataclass
-class OptionPosition:
+class OptionLeg:
     option_type: str  # 'call' or 'put'
     strike: float
     expiry: pd.Timestamp = pd.Timestamp.min
@@ -96,11 +96,11 @@ class OptionPosition:
 @dataclass
 class TradePortfolio:
     cash: float = 0.0
-    positions: List[OptionPosition] = field(default_factory=list)
+    optionLeg: List[OptionLeg] = field(default_factory=list)
     equity_curve: List[Dict[str, object]] = field(default_factory=list)
 
-    def add_position(self, option_type: str, strike: float, expiry: pd.Timestamp, contracts: int, entry_time: pd.Timestamp, entry_price: float, profit_take: float, cost: float) -> tuple[OptionTrade, OptionPosition]:
-        position = OptionPosition(option_type=option_type, strike=strike, expiry=expiry)
+    def add_optionLeg(self, option_type: str, strike: float, expiry: pd.Timestamp, contracts: int, entry_time: pd.Timestamp, entry_price: float, profit_take: float, cost: float) -> tuple[OptionTrade, OptionLeg]:
+        optionLeg = OptionLeg(option_type=option_type, strike=strike, expiry=expiry)
         trade = OptionTrade(
             contracts=contracts,
             entry_price=entry_price,
@@ -109,22 +109,22 @@ class TradePortfolio:
             cost_basis=cost
         )
 
-        position.trades.append(trade)
-        self.positions.append(position)
-        return trade, position
+        optionLeg.trades.append(trade)
+        self.optionLeg.append(optionLeg)
+        return trade, optionLeg
 
     def num_portfolio_trades(self) -> int:
-        return sum(position.num_trades() for position in self.positions)
+        return sum(optionLeg.num_trades() for optionLeg in self.optionLeg)
 
-    def first_open_trade(self) -> Union[tuple[OptionTrade, OptionPosition], tuple[None, None]]:
-        for position in self.positions:
-            trade = position.first_open_trade()
+    def first_open_trade(self) -> Union[tuple[OptionTrade, OptionLeg], tuple[None, None]]:
+        for optionLeg in self.optionLeg:
+            trade = optionLeg.first_open_trade()
             if trade is not None:
-                return trade, position
+                return trade, optionLeg
         return None, None
 
     def pnl(self, current_price: float) -> float:
-        return sum(position.pnl(current_price) for position in self.positions)
+        return sum(optionLeg.pnl(current_price) for optionLeg in self.optionLeg)
 
 
 def max_drawdown(equity: pd.Series) -> float:

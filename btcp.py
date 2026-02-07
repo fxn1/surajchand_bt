@@ -248,17 +248,17 @@ def backtest(
             entryExit = row.entryExit
             exit_true = False
             # Mark-to-market
-            open_trade, posn = entryExit.portfolio.first_open_trade()
+            open_trade, optionLeg = entryExit.portfolio.first_open_trade()
             if open_trade and open_trade.contracts > 0:
-                T = max((posn.expiry - d).days / 365.0, 1 / 365.0)
-                px, _ = bs_model.bs_call_price_delta(S, posn.strike, T, r, q, sigma)
+                T = max((optionLeg.expiry - d).days / 365.0, 1 / 365.0)
+                px, _ = bs_model.bs_call_price_delta(S, optionLeg.strike, T, r, q, sigma)
                 pos_value = px * 100 * open_trade.contracts
                 equity = entryExit.portfolio.cash + pos_value
 
                 holding = open_trade.holding(d)
                 hit_profit, exit_true = entryExit.check_exit_conditions(holding, px, open_trade)
                 if exit_true:
-                    # print(f"{entryExit.name} | {d.date()} Exit: S={S} K={posn.strike} exp={posn.expiry.date()} hit_profit={hit_profit} Tpx=${open_trade.target_price:.2f} px=${px:.2f}  contracts={open_trade.contracts} pos_value=${pos_value:,.2f} equity=${equity:,.2f} rsi={rsi} sigma={sigma} holding_days={holding}")
+                    # print(f"{entryExit.name} | {d.date()} Exit: S={S} K={optionLeg.strike} exp={optionLeg.expiry.date()} hit_profit={hit_profit} Tpx=${open_trade.target_price:.2f} px=${px:.2f}  contracts={open_trade.contracts} pos_value=${pos_value:,.2f} equity=${equity:,.2f} rsi={rsi} sigma={sigma} holding_days={holding}")
                     entryExit.portfolio.cash += pos_value
                     entryExit.portfolio.cash -= commission_per_contract * open_trade.contracts
                     open_trade.exit_price = px
@@ -267,8 +267,8 @@ def backtest(
                     entryExit.report.append({
                         "entry_date": open_trade.entry_time.date(),
                         "exit_date": d.date(),
-                        "expiry": posn.expiry.date(),
-                        "K": posn.strike,
+                        "expiry": optionLeg.expiry.date(),
+                        "K": optionLeg.strike,
                         "contracts": open_trade.contracts,
                         "entry_price": open_trade.entry_price,
                         "exit_price": px,
@@ -315,7 +315,7 @@ def backtest(
                         continue
 
                 entryExit.portfolio.cash -= cost
-                open_trade, posn = entryExit.portfolio.add_position("TODO", K, expiry, contracts, d, entry_px, profit_take, cost)
+                open_trade, optionLeg = entryExit.portfolio.add_optionLeg("TODO", K, expiry, contracts, d, entry_px, profit_take, cost)
                 # print(f"{entryExit.name} | {d.date()} ENTRY: S={S} K={K} exp={expiry.date()} Tpx=${open_trade.target_price:.2f} px=${entry_px:.2f} contracts={contracts} cost=${cost:,.2f} rsi={rsi} sigma={sigma}")
 
     stratDf = pd.DataFrame(columns=["name", "end_eq", "cagr", "mdd", "sharpe", "losses", "profit_factor", "win_rate", "wins", "trades"])
