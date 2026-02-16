@@ -24,7 +24,6 @@ Notes
 from __future__ import annotations
 
 import math
-from calendar import monthcalendar, FRIDAY
 
 import numpy as np
 import pandas as pd
@@ -34,7 +33,7 @@ from black_scholes import BlackScholesModel
 from criteria import EntryExit
 from buy_and_hold import BuyAndHold
 from option_rsi import OptionRSI
-from data_classes import trade_stats
+from data_classes import trade_stats, OptionLeg, OptionTrade
 
 ##############
 
@@ -110,62 +109,6 @@ def rsi_wilder(close: pd.Series, period: int = 14) -> pd.Series:
     rs = avg_gain / avg_loss
     return 100 - (100 / (1 + rs))
 
-
-# -----------------------------
-# Expiration rules
-# -----------------------------
-
-def third_friday(year: int, month: int) -> pd.Timestamp:
-    cal = monthcalendar(year, month)
-    fridays = [week[FRIDAY] for week in cal if week[FRIDAY] != 0]
-    return pd.Timestamp(year=year, month=month, day=fridays[2])  # 3rd Friday
-
-
-def adjust_to_prev_trading_day(ts: pd.Timestamp, trading_index: pd.DatetimeIndex) -> pd.Timestamp:
-    """
-    If ts isn't a trading day in the dataset, walk backward until it is.
-    (Handles holidays like Good Friday without needing a full exchange calendar.)
-    """
-    t = ts
-    while t not in trading_index:
-        t -= pd.Timedelta(days=1)
-        if (ts - t).days > 10:
-            # Safety valve
-            break
-    return t
-
-
-def pick_expiry(entry: pd.Timestamp,
-                trading_index: pd.DatetimeIndex,
-                mode: str = "monthly_3rd_friday",
-                min_days_out: int = 365) -> pd.Timestamp:
-    """
-    mode:
-      - monthly_3rd_friday: first monthly 3rd Friday >= entry + min_days_out
-      - leaps_jan_3rd_friday: first Jan 3rd Friday >= entry + min_days_out
-    """
-    target = entry + pd.Timedelta(days=min_days_out)
-
-    if mode == "monthly_3rd_friday":
-        y, m = target.year, target.month
-        exp = third_friday(y, m)
-        if exp < target:
-            # go to next month
-            if m == 12:
-                y, m = y + 1, 1
-            else:
-                m += 1
-            exp = third_friday(y, m)
-        return adjust_to_prev_trading_day(exp, trading_index)
-
-    if mode == "leaps_jan_3rd_friday":
-        y = entry.year + 1
-        exp = third_friday(y, 1)
-        if exp < target:
-            exp = third_friday(y + 1, 1)
-        return adjust_to_prev_trading_day(exp, trading_index)
-
-    raise ValueError(f"Unknown expiry mode: {mode}")
 
 # -----------------------------
 # Backtest engine
@@ -248,28 +191,25 @@ def backtest(
             entryExit = row.entryExit
             exit_true = False
             # Mark-to-market
-            open_trade, optionLeg = entryExit.portfolio.first_open_trade()
-            if open_trade and open_trade.contracts > 0:
-                T = max((optionLeg.expiry - d).days / 365.0, 1 / 365.0)
-                px, _ = bs_model.bs_call_price_delta(S, optionLeg.strike, T, r, q, sigma)
-                pos_value = px * 100 * open_trade.contracts
+            open_trade, base_leg = entryExit.portfolio.first_open_trade()
+            if open_trade and open_trade.qty > 0:
+                px = base_leg.get_price(S, bs_model, r, q, sigma, d)
+                pos_value = open_trade.posn_value(px)
                 equity = entryExit.portfolio.cash + pos_value
 
                 holding = open_trade.holding(d)
                 hit_profit, exit_true = entryExit.check_exit_conditions(holding, px, open_trade)
                 if exit_true:
-                    # print(f"{entryExit.name} | {d.date()} Exit: S={S} K={optionLeg.strike} exp={optionLeg.expiry.date()} hit_profit={hit_profit} Tpx=${open_trade.target_price:.2f} px=${px:.2f}  contracts={open_trade.contracts} pos_value=${pos_value:,.2f} equity=${equity:,.2f} rsi={rsi} sigma={sigma} holding_days={holding}")
+                    # print(f"{entryExit.name} | {d.date()} Exit: S={S} K={base_leg.strike} exp={base_leg.expiry.date()} hit_profit={hit_profit} Tpx=${open_trade.target_price:.2f} px=${px:.2f}  qty={open_trade.qty} pos_value=${pos_value:,.2f} equity=${equity:,.2f} rsi={rsi} sigma={sigma} holding_days={holding}")
                     entryExit.portfolio.cash += pos_value
-                    entryExit.portfolio.cash -= commission_per_contract * open_trade.contracts
+                    entryExit.portfolio.cash -= commission_per_contract * open_trade.qty
                     open_trade.exit_price = px
                     open_trade.exit_time = d  # open_trade is now closed
 
                     entryExit.report.append({
                         "entry_date": open_trade.entry_time.date(),
                         "exit_date": d.date(),
-                        "expiry": optionLeg.expiry.date(),
-                        "K": optionLeg.strike,
-                        "contracts": open_trade.contracts,
+                        "contracts": open_trade.qty,
                         "entry_price": open_trade.entry_price,
                         "exit_price": px,
                         "holding_days": holding,
@@ -288,35 +228,30 @@ def backtest(
                 if not entryExit.check_entry_conditions(d, end_ts, rsi, sigma):
                     continue
 
-                expiry = pick_expiry(d, idx, mode=expiry_mode, min_days_out=365)
-                if expiry <= d:
+                ok, expiry, K, entry_px = OptionLeg.check_entry_px(d, idx, expiry_mode, S=S, bs_model=bs_model, q=q, r=r, sigma=sigma, strike_round=strike_round, target_delta=target_delta, min_days_out=365)
+                if not ok:
                     continue
 
-                T0 = (expiry - d).days / 365.0
-                K = bs_model.strike_for_delta_call(S, target_delta, T0, r, q, sigma, strike_round=strike_round)
-                entry_px, _ = bs_model.bs_call_price_delta(S, K, T0, r, q, sigma)
-                if not (math.isfinite(entry_px) and entry_px > 0):
-                    continue
-
+                mult = OptionTrade.multiplier() # TODO: hardcoded optionTrade for now.
                 alloc = equity * position_size_pct
-                contracts = int(alloc // (entry_px * 100))
-                if contracts < 1:
-                    contracts = 1 if entryExit.portfolio.cash >= entry_px * 100 else 0
-                if contracts == 0:
+                qty = int(alloc // (entry_px * mult))
+                if qty < 1:
+                    qty = 1 if entryExit.portfolio.cash >= entry_px * mult else 0
+                if qty == 0:
                     continue
 
-                cost = entry_px * 100 * contracts + commission_per_contract * contracts
+                cost = entry_px * mult * qty + commission_per_contract * qty
                 if cost > entryExit.portfolio.cash:
-                    contracts = int(entryExit.portfolio.cash // (entry_px * 100))
-                    if contracts < 1:
+                    qty = int(entryExit.portfolio.cash // (entry_px * mult))
+                    if qty < 1:
                         continue
-                    cost = entry_px * 100 * contracts + commission_per_contract * contracts
+                    cost = entry_px * mult * qty + commission_per_contract * qty
                     if cost > entryExit.portfolio.cash:
                         continue
 
                 entryExit.portfolio.cash -= cost
-                open_trade, optionLeg = entryExit.portfolio.add_optionLeg("TODO", K, expiry, contracts, d, entry_px, profit_take, cost)
-                # print(f"{entryExit.name} | {d.date()} ENTRY: S={S} K={K} exp={expiry.date()} Tpx=${open_trade.target_price:.2f} px=${entry_px:.2f} contracts={contracts} cost=${cost:,.2f} rsi={rsi} sigma={sigma}")
+                open_trade, base_leg = entryExit.portfolio.add_optionLeg(K, expiry, qty, d, entry_px, profit_take, cost)
+                # print(f"{entryExit.name} | {d.date()} ENTRY: S={S} K={K} exp={expiry.date()} Tpx=${open_trade.target_price:.2f} px=${entry_px:.2f} qty={qty} cost=${cost:,.2f} rsi={rsi} sigma={sigma}")
 
     stratDf = pd.DataFrame(columns=["name", "end_eq", "cagr", "mdd", "sharpe", "losses", "profit_factor", "win_rate", "wins", "trades"])
     plotDf = pd.DataFrame(columns=["name", "index", "values"])
