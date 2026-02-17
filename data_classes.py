@@ -23,6 +23,7 @@ from typing import List, Dict, Optional, Union
 import pandas as pd
 import math
 from calendar import monthcalendar, FRIDAY
+from black_scholes import BlackScholesModel
 
 
 @dataclass
@@ -82,10 +83,6 @@ class UnderlyingTrade(BaseTrade):
     def __init__(self, qty: int, entry_price: float, entry_time: pd.Timestamp, cost_basis: float):
         BaseTrade.__init__(self, entry_price=entry_price, entry_time=entry_time, cost_basis=cost_basis, qty=qty, multiplier=1)
 
-    @staticmethod
-    def multiplier() -> int:
-        return 1
-
 
 @dataclass
 class OptionTrade(BaseTrade):
@@ -95,15 +92,12 @@ class OptionTrade(BaseTrade):
         BaseTrade.__init__(self, entry_price=entry_price, entry_time=entry_time, cost_basis=cost_basis, qty=qty, multiplier=100)
         self.target_price = entry_price * (1 + profit_take)
 
-    @staticmethod
-    def multiplier() -> int:
-        return 100
 
 @dataclass
 class BaseLeg:
     trades: List[BaseTrade] = field(default_factory=list)
 
-    def get_price(self, S, bs_model, r, q, sigma, d):
+    def get_price(self, S, r, q, sigma, d):
         raise NotImplementedError
 
     def first_open_trade(self) -> Optional[BaseTrade]:
@@ -121,7 +115,7 @@ class BaseLeg:
 
 @dataclass
 class UnderlyingLeg(BaseLeg):
-    def get_price(self, S, bs_model, r, q, sigma, d):
+    def get_price(self, S, r, q, sigma, d):
         """
         Compute the mark-to-market price - UnderlyingLeg: price = S
         """
@@ -133,13 +127,14 @@ class OptionLeg(BaseLeg):
     # option_type: str  # 'call' or 'put'
     strike: float = 0.0
     expiry: pd.Timestamp = pd.Timestamp.min
+    bs_model: BlackScholesModel = BlackScholesModel(q=0.00)
 
-    def get_price(self, S, bs_model, r, q, sigma, d):
+    def get_price(self, S, r, q, sigma, d):
         """
         Compute the mark-to-market price = Black-Scholes call
         """
         T = max((self.expiry - d).days / 365.0, 1/365.0)
-        px, _ = bs_model.bs_call_price_delta(S, self.strike, T, r, q, sigma)
+        px, _ = self.bs_model.bs_call_price_delta(S, self.strike, T, r, q, sigma)
         return px
 
     # -----------------------------
@@ -200,19 +195,19 @@ class OptionLeg(BaseLeg):
         raise ValueError(f"Unknown expiry mode: {mode}")
 
     @staticmethod
-    def get_entry_px(S, bs_model, d, expiry, q, r, sigma, strike_round, target_delta):
+    def get_entry_px(S, d, expiry, q, r, sigma, strike_round, target_delta):
         T0 = (expiry - d).days / 365.0
-        K = bs_model.strike_for_delta_call(S, target_delta, T0, r, q, sigma, strike_round=strike_round)
-        entry_px, _ = bs_model.bs_call_price_delta(S, K, T0, r, q, sigma)
+        K = OptionLeg.bs_model.strike_for_delta_call(S, target_delta, T0, r, q, sigma, strike_round=strike_round)
+        entry_px, _ = OptionLeg.bs_model.bs_call_price_delta(S, K, T0, r, q, sigma)
         return K, entry_px
 
     @staticmethod
-    def check_entry_px(d, idx, expiry_mode, S, bs_model, q, r, sigma, strike_round, target_delta, min_days_out=365):
+    def check_entry_px(d, idx, expiry_mode, S, q, r, sigma, strike_round, target_delta, min_days_out=365):
         expiry = OptionLeg.pick_expiry(d, idx, mode=expiry_mode, min_days_out=min_days_out)
         if expiry <= d:
             return False, None, None, None
 
-        K, entry_px = OptionLeg.get_entry_px(S, bs_model, d, expiry, q, r, sigma, strike_round, target_delta)
+        K, entry_px = OptionLeg.get_entry_px(S, d, expiry, q, r, sigma, strike_round, target_delta)
 
         if not (math.isfinite(entry_px) and entry_px > 0):
             return False, None, None, None
@@ -277,18 +272,3 @@ def trade_stats(trades):
         win_rate = float("nan")
         profit_factor = float("nan")
     return losses, profit_factor, win_rate, wins
-
-
-@dataclass
-class TradeRule:
-    entry_cutoff: pd.Timestamp = pd.Timestamp.min
-    exit_cutoff: pd.Timestamp = pd.Timestamp.min
-    trade_portfolios: List[TradePortfolio] = field(default_factory=list)
-
-
-@dataclass
-class Backtest:
-    name: str
-    start_date: pd.Timestamp = pd.Timestamp.min
-    end_date: pd.Timestamp = pd.Timestamp.min
-    trade_rules: List[TradeRule] = field(default_factory=list)

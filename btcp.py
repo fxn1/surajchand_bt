@@ -29,11 +29,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from black_scholes import BlackScholesModel
-from criteria import EntryExit
+from criteria import OptionEntryExit
 from buy_and_hold import BuyAndHold
 from option_rsi import OptionRSI
-from data_classes import trade_stats, OptionLeg, OptionTrade
+from data_classes import trade_stats
 
 ##############
 
@@ -116,7 +115,6 @@ def rsi_wilder(close: pd.Series, period: int = 14) -> pd.Series:
 
 
 def backtest(
-    bs_model: BlackScholesModel,
     entryExit_df: pd.DataFrame,
     symbol: str = STOCK_SYMBOL,
     start: str = START_DATE,
@@ -193,7 +191,7 @@ def backtest(
             # Mark-to-market
             open_trade, base_leg = entryExit.portfolio.first_open_trade()
             if open_trade and open_trade.qty > 0:
-                px = base_leg.get_price(S, bs_model, r, q, sigma, d)
+                px = base_leg.get_price(S, r, q, sigma, d)
                 pos_value = open_trade.posn_value(px)
                 equity = entryExit.portfolio.cash + pos_value
 
@@ -225,33 +223,32 @@ def backtest(
 
             # Entries
             if exit_true or not open_trade:
-                if not entryExit.check_entry_conditions(d, end_ts, rsi, sigma):
-                    continue
-
-                ok, expiry, K, entry_px = OptionLeg.check_entry_px(d, idx, expiry_mode, S=S, bs_model=bs_model, q=q, r=r, sigma=sigma, strike_round=strike_round, target_delta=target_delta, min_days_out=365)
+                ok, leg, open_trade = entryExit.check_entry_conditions(d, idx, expiry_mode, S, q, r, end_ts, rsi, sigma, strike_round, target_delta, min_days_out=365)
                 if not ok:
                     continue
-
-                mult = OptionTrade.multiplier() # TODO: hardcoded optionTrade for now.
+                mult = open_trade.multiplier
                 alloc = equity * position_size_pct
-                qty = int(alloc // (entry_px * mult))
+                qty = int(alloc // (open_trade.entry_price * mult))
                 if qty < 1:
-                    qty = 1 if entryExit.portfolio.cash >= entry_px * mult else 0
+                    qty = 1 if entryExit.portfolio.cash >= open_trade.entry_price * mult else 0
                 if qty == 0:
                     continue
 
-                cost = entry_px * mult * qty + commission_per_contract * qty
+                cost = open_trade.entry_price * mult * qty + commission_per_contract * qty
                 if cost > entryExit.portfolio.cash:
-                    qty = int(entryExit.portfolio.cash // (entry_px * mult))
+                    qty = int(entryExit.portfolio.cash // (open_trade.entry_price * mult))
                     if qty < 1:
                         continue
-                    cost = entry_px * mult * qty + commission_per_contract * qty
+                    cost = open_trade.entry_price * mult * qty + commission_per_contract * qty
                     if cost > entryExit.portfolio.cash:
                         continue
 
                 entryExit.portfolio.cash -= cost
-                open_trade, base_leg = entryExit.portfolio.add_optionLeg(K, expiry, qty, d, entry_px, profit_take, cost)
-                # print(f"{entryExit.name} | {d.date()} ENTRY: S={S} K={K} exp={expiry.date()} Tpx=${open_trade.target_price:.2f} px=${entry_px:.2f} qty={qty} cost=${cost:,.2f} rsi={rsi} sigma={sigma}")
+                open_trade.qty=qty
+                open_trade.cost_basis=cost
+                leg.trades.append(open_trade)
+                entryExit.portfolio.legs.append(leg) # Add leg to portfolio
+                # print(f"{entryExit.name} | {d.date()} ENTRY: S={S} K={leg.strike} exp={leg.expiry.date()} Tpx=${open_trade.target_price:.2f} px=${open_trade.entry_price:.2f} qty={qty} cost=${cost:,.2f} rsi={rsi} sigma={sigma}")
 
     stratDf = pd.DataFrame(columns=["name", "end_eq", "cagr", "mdd", "sharpe", "losses", "profit_factor", "win_rate", "wins", "trades"])
     plotDf = pd.DataFrame(columns=["name", "index", "values"])
@@ -276,16 +273,15 @@ def backtest(
 
 def main():
     # Change these if you want:
-    entryExit = EntryExit("entry_rsi_30")
+    entryExit = OptionEntryExit("entry_rsi_30")
     entryExit.setRsiHoldProfit(entry_rsi_low=30.0, entry_rsi_high=50.0, hold_days=180, profit_take=0.50)
-    entryExit1 = EntryExit("entry_rsi_20")
+    entryExit1 = OptionEntryExit("entry_rsi_20")
     entryExit1.setRsiHoldProfit(entry_rsi_low=20.0, entry_rsi_high=70.0, hold_days=180, profit_take=0.50)
     entryExit_df = pd.DataFrame(columns=["entryExit"])
     entryExit_df.loc[len(entryExit_df)] = [entryExit]
     entryExit_df.loc[len(entryExit_df)] = [entryExit1]
 
     stratDf, plotDf = backtest(
-        bs_model=BlackScholesModel(q=0.00),
         entryExit_df=entryExit_df,
         symbol=STOCK_SYMBOL,
         start=START_DATE,
