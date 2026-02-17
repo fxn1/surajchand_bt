@@ -21,7 +21,7 @@ class BaseEntryExit:
 class BuyAndHoldEntryExit(BaseEntryExit):
 
     @staticmethod
-    def check_entry_conditions(d, idx, expiry_mode, S, bs_model, q, r, end_ts, rsi: float, sigma: float, strike_round, target_delta, min_days_out=365) -> [bool, OptionLeg, OptionTrade]:
+    def check_entry_conditions(d, idx, expiry_mode, S, q, r, end_ts, rsi: float, sigma: float, strike_round, target_delta, min_days_out=365) -> [bool, OptionLeg, OptionTrade]:
         # underlying entry rule (for now always true)
         leg = UnderlyingLeg()
         # btcp will set qty and cost_basis
@@ -46,11 +46,6 @@ class OptionEntryExit(BaseEntryExit):
         self.hold_days = hold_days
         self.profit_take = profit_take
 
-    def setRsiHoldProfit(self, entry_rsi_low: float = 30.0, entry_rsi_high: float = 50.0, hold_days: int = 180, profit_take: float = 0.50):
-        self.entry_rsi_low = entry_rsi_low
-        self.entry_rsi_high = entry_rsi_high
-        self.hold_days = hold_days
-        self.profit_take = profit_take
 
     def check_entry_conditions(self, d, idx, expiry_mode, S, q, r, end_ts, rsi: float, sigma: float, strike_round, target_delta, min_days_out=365) -> [bool, OptionLeg, OptionTrade]:
         """

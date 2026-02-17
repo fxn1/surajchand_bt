@@ -273,13 +273,9 @@ def backtest(
 
 def main():
     # Change these if you want:
-    entryExit = OptionEntryExit("entry_rsi_30")
-    entryExit.setRsiHoldProfit(entry_rsi_low=30.0, entry_rsi_high=50.0, hold_days=180, profit_take=0.50)
-    entryExit1 = OptionEntryExit("entry_rsi_20")
-    entryExit1.setRsiHoldProfit(entry_rsi_low=20.0, entry_rsi_high=70.0, hold_days=180, profit_take=0.50)
     entryExit_df = pd.DataFrame(columns=["entryExit"])
-    entryExit_df.loc[len(entryExit_df)] = [entryExit]
-    entryExit_df.loc[len(entryExit_df)] = [entryExit1]
+    entryExit_df.loc[len(entryExit_df)] = [OptionEntryExit("entry_rsi_30", entry_rsi_low=30.0, entry_rsi_high=50.0, hold_days=180, profit_take=0.50)]
+    entryExit_df.loc[len(entryExit_df)] = [OptionEntryExit("entry_rsi_20", entry_rsi_low=20.0, entry_rsi_high=70.0, hold_days=180, profit_take=0.50)]
 
     stratDf, plotDf = backtest(
         entryExit_df=entryExit_df,
